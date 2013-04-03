@@ -51,9 +51,9 @@ public class OnionVisualizer extends JPanel {
 	}
 
 	public void addPoint(BitString bitString) {
-		// System.out.println(bitString);
 		double x = (double) bitString.numberOfOnes() / bitString.length();
-		double y = 0.5 + (Math.random() - 0.5) * ((x > 0.5 ? 1 - x : x) * 2); // TODO: Calculate coordinate from permutation
+		double h = Math.cos(Math.PI / 2.0 * Math.abs(x * 2 - 1));
+		double y = (1 - h) / 2.0 + h * bitString.positionOfOnes();
 
 		Point2D.Double point = new Point2D.Double(x, y);
 		points.add(point);
