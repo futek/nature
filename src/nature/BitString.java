@@ -63,9 +63,13 @@ public class BitString {
 		double avg = (double) sum / n;
 		double min = (ones - 1) * ones / 2.0 / n;
 		double max = ((n - 1) * n - (n - ones - 1) * (n - ones)) / 2.0 / n;
-		double ratio = (avg - min) / (max - min);
+		double diff = max - min;
 
-		return ratio;
+		if (diff == 0) {
+			return 0.0;
+		}
+
+		return (avg - min) / diff;
 	}
 
 	public BitString globalMutation(double probability) {
