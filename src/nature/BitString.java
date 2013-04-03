@@ -48,6 +48,26 @@ public class BitString {
 		return ones;
 	}
 
+	public double positionOfOnes() {
+		int n = string.length;
+		int sum = 0;
+		int ones = 0;
+
+		for (int i = 0; i < n; i++) {
+			if (string[i]) {
+				sum += i;
+				ones++;
+			}
+		}
+
+		double avg = (double) sum / n;
+		double min = (ones - 1) * ones / 2.0 / n;
+		double max = ((n - 1) * n - (n - ones - 1) * (n - ones)) / 2.0 / n;
+		double ratio = (avg - min) / (max - min);
+
+		return ratio;
+	}
+
 	public BitString globalMutation(double probability) {
 		boolean[] mutation = new boolean[string.length];
 		for (int i = 0; i < string.length; i++) {
