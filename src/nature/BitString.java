@@ -1,12 +1,12 @@
 package nature;
 
+import java.util.Arrays;
+import java.util.Random;
+
 public class BitString {
+	private static final Random random = new Random();
+
 	private boolean[] string;
-//	Fitness<BitString> fitness;
-//
-//	public BitString(Fitness<BitString> fitness) {
-//		this.fitness = fitness;
-//	}
 
 	public BitString(int length, double probability) {
 		string = new boolean[length];
@@ -48,44 +48,25 @@ public class BitString {
 		return ones;
 	}
 
-//	public void OnePlusOne(double globalMutationProbability) {
-//		boolean[] current = string;
-//		double optimumFitness = fitness.optimum(current);
-//		long iterations = 0;
-//
-//		while (fitness.optimum(current)) {
-//			iterations++;
-//
-//			// publish(iteration)
-//
-//			boolean[] mutation = globalMutation(current, globalMutationProbability);
-//
-//			double currentFitness = fitness.evaluate(current);
-//			double mutationFitness = fitness.evaluate(mutation);
-//
-//			if (mutationFitness >= currentFitness) {
-//				// publish(mutation);
-//				current = mutation;
-//			}
-//
-//			if (mutationFitness == optimumFitness) {
-//				break;
-//			}
-//		}
-//	}
-//
-//	private boolean[] globalMutation(boolean[] original, double probability) {
-//		boolean[] mutation = new boolean[original.length];
-//		for (int i = 0; i < original.length; i++) {
-//			mutation[i] = (Math.random() >= probability ? original[i] : !original[i]);
-//		}
-//		return mutation;
-//	}
-
 	public BitString globalMutation(double probability) {
 		boolean[] mutation = new boolean[string.length];
 		for (int i = 0; i < string.length; i++) {
-			mutation[i] = (Math.random() >= probability ? string[i] : !string[i]);
+			mutation[i] = (random.nextDouble() >= probability ? string[i] : !string[i]);
+		}
+		return new BitString(mutation);
+	}
+
+	public BitString localMutation() {
+		boolean[] mutation = Arrays.copyOf(string, string.length);
+		int i = random.nextInt(mutation.length);
+		mutation[i] = !string[i];
+		return new BitString(mutation);
+	}
+
+	public BitString constructMutation(double[] pheromone) {
+		boolean[] mutation = new boolean[string.length];
+		for (int i = 0; i < mutation.length; i++) {
+			mutation[i] = random.nextDouble() < pheromone[i];
 		}
 		return new BitString(mutation);
 	}
