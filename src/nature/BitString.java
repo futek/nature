@@ -103,4 +103,8 @@ public class BitString {
 		}
 		return sb.toString();
 	}
+
+	public boolean[] getString() {
+		return string;
+	}
 }
