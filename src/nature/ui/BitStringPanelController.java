@@ -9,8 +9,10 @@ import javax.swing.event.ChangeListener;
 import nature.Algorithm;
 import nature.BitString;
 import nature.FitnessGoal;
+import nature.MinMaxAntSystemBitString;
 import nature.OnePlusOneBitString;
 import nature.ProgressListener;
+import nature.SimulatedAnnealingBitString;
 
 public class BitStringPanelController {
 	private BitStringPanel view;
@@ -227,7 +229,19 @@ public class BitStringPanelController {
 
 	private Algorithm<BitString> getAlgorithm(FitnessGoal<BitString> fitnessGoal, BitString startState) {
 		// TODO: Read algo combobox and parameters
-		algorithm = new OnePlusOneBitString(new ProgressHandler(), fitnessGoal, startState, 1.0 / startState.length()); // TODO: Read parameter
+		String algoSelection = (String)view.algorithmPane.algoComboBox.getSelectedItem();
+
+		switch (algoSelection) {
+			case "(1+1) Evolutionary Algorithm":
+				algorithm = new OnePlusOneBitString(new ProgressHandler(), fitnessGoal, startState, 1.0 / startState.length()); // TODO: Read parameter
+				break;
+			case "Simulated Annealing":
+				algorithm = new SimulatedAnnealingBitString(new ProgressHandler(), fitnessGoal, startState, 0.01, 100000); // TODO: Read parameter
+				break;
+			case "Min-Max Ant System":
+				algorithm = new MinMaxAntSystemBitString(new ProgressHandler(), fitnessGoal, startState, 0.01);
+				break;
+		}
 
 		return algorithm;
 	}

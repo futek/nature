@@ -3,25 +3,26 @@ package nature;
 import java.util.Random;
 
 public class SimulatedAnnealingBitString extends Algorithm<BitString> {
+	private static final Random random = new Random();
+
 	private FitnessGoal<BitString> fitnessGoal;
 	private BitString current;
 	private double initialTemperature;
 	private int maxTime;
-	private Random random;
 
 	public SimulatedAnnealingBitString(ProgressListener<BitString> progressListener, FitnessGoal<BitString> fitnessGoal, BitString bitString, double initialTemperature, int maxTime) {
 		super(progressListener);
-		
+
 		this.initialTemperature = initialTemperature;
 		this.maxTime = maxTime;
 		this.fitnessGoal = fitnessGoal;
 		this.current = bitString;
 	}
-	
+
 	private double temperature(double time) {
 		return initialTemperature - time * (initialTemperature / maxTime);
 	}
-	
+
 	private double alpha(double time) {
 		return Math.exp(1.0 / temperature(time));
 	}
@@ -44,14 +45,5 @@ public class SimulatedAnnealingBitString extends Algorithm<BitString> {
 				cancel();
 			}
 		}
-		
-		
-
-		
-
-		
-
-
-		
 	}
 }

@@ -8,14 +8,14 @@ public class MinMaxAntSystemBitString extends Algorithm<BitString> {
 	private double rho;
 	private double[] pheromone;
 
-	public MinMaxAntSystemBitString(ProgressListener<BitString> progressListener, FitnessGoal<BitString> fitnessGoal, BitString bitString, double globalMutationProbability, double rho) {
+	public MinMaxAntSystemBitString(ProgressListener<BitString> progressListener, FitnessGoal<BitString> fitnessGoal, BitString bitString, double rho) {
 		super(progressListener);
-		
+
 		this.rho = rho;
 		this.fitnessGoal = fitnessGoal;
 		this.current = bitString;
 	}
-	
+
 	private void updatePheromones(BitString bitString) {
 		boolean[] string = bitString.getString();
 		double tauMin = 1.0 / bitString.length();
@@ -28,7 +28,7 @@ public class MinMaxAntSystemBitString extends Algorithm<BitString> {
 			}
 		}
 	}
-	
+
 
 	@Override
 	public void init() {
@@ -41,7 +41,7 @@ public class MinMaxAntSystemBitString extends Algorithm<BitString> {
 	public void step(long iteration) {
 		BitString mutation = current.constructMutation(pheromone);
 
-		
+
 		if (fitnessGoal.compare(current, mutation) <= 0) {
 			current = mutation;
 
@@ -51,9 +51,9 @@ public class MinMaxAntSystemBitString extends Algorithm<BitString> {
 				cancel();
 			}
 		}
-		
+
 		updatePheromones(current);
 
-		
+
 	}
 }
