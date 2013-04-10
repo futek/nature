@@ -12,19 +12,29 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
-import javax.swing.JTextField;
 
 public class PermutationPanel extends JPanel {
+	public InitializationPane initializationPane;
+	public FitnessPane fitnessPane;
+	public AlgorithmPane algorithmPane;
+	public ControlPane controlPane;
+	public VisualizationPane visualizationPane;
+
 	public PermutationPanel() {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-		addSection("Initialization", new InitializationPane());
-		addSection("Fitness Goal", new FitnessPane());
-		addSection("Algorithm", new AlgorithmPane());
-		addSection("Control", new ControlPane());
-		addSection("Visualization", new VisualizationPane());
+		initializationPane = new InitializationPane();
+		fitnessPane = new FitnessPane();
+		algorithmPane = new AlgorithmPane();
+		controlPane = new ControlPane();
+		visualizationPane = new VisualizationPane();
+
+		addSection("Initialization", initializationPane);
+		addSection("Fitness Goal", fitnessPane);
+		addSection("Algorithm", algorithmPane);
+		addSection("Control", controlPane);
+		addSection("Visualization", visualizationPane);
 	}
 
 	private void addSection(String title, JComponent component) {
@@ -35,14 +45,14 @@ public class PermutationPanel extends JPanel {
 		add(component);
 	}
 
-	private class InitializationPane extends JPanel {
+	public class InitializationPane extends JPanel {
+		public JButton loadButton;
+		public JLabel statusLabel;
+
 		public InitializationPane() {
 			// Components
-			JButton loadButton = new JButton("Load Graph");
-			JLabel statusLabel = new JLabel("Status: No graph loaded.");
-
-			// Canned
-			statusLabel.setText("Status: Graph loaded (1024 nodes).");
+			loadButton = new JButton("Load Graph");
+			statusLabel = new JLabel("Status: No graph loaded");
 
 			// Layout
 			GroupLayout layout = new GroupLayout(this);
@@ -63,17 +73,17 @@ public class PermutationPanel extends JPanel {
 		}
 	}
 
-	private class FitnessPane extends JPanel {
+	public class FitnessPane extends JPanel {
+		public JComboBox<String> goalComboBox, funcComboBox;
+
 		public FitnessPane() {
 			// Components
-			JComboBox<String> goalComboBox = new JComboBox<String>();
-			JComboBox<String> funcComboBox = new JComboBox<String>();
-
-			// Canned
+			goalComboBox = new JComboBox<String>();
 			goalComboBox.addItem("Maximize");
 			goalComboBox.addItem("Minimize");
 			goalComboBox.setSelectedIndex(1);
 
+			funcComboBox = new JComboBox<String>();
 			funcComboBox.addItem("length of tour");
 
 			// Layout
@@ -94,90 +104,7 @@ public class PermutationPanel extends JPanel {
 		}
 	}
 
-	private class AlgorithmPane extends JPanel {
-		public AlgorithmPane() {
-			// Components
-			JComboBox<String> algoComboBox = new JComboBox<String>();
-			algoComboBox.setMaximumSize(new Dimension(Integer.MAX_VALUE, 0)); // Avoid vertical expansion
-
-			JSeparator separator = new JSeparator();
-			separator.setMaximumSize(new Dimension(Integer.MAX_VALUE, 6)); // Avoid vertical expansion
-
-			JPanel algoParamPane = new JPanel(); // ...
-
-			// Canned
-			algoComboBox.addItem("(1+1) Evolutionary Algorithm");
-			algoComboBox.addItem("Simulated Annealing");
-			algoComboBox.addItem("Min-Max Ant System");
-
-			{
-				GroupLayout layout = new GroupLayout(algoParamPane);
-				layout.setAutoCreateGaps(true);
-				layout.setAutoCreateContainerGaps(true);
-				algoParamPane.setLayout(layout);
-				JLabel label = new JLabel("Local mutation probability:");
-				JTextField field = new JTextField("1/n");
-				layout.setHorizontalGroup(layout.createSequentialGroup().addComponent(label).addComponent(field));
-				layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(label).addComponent(field));
-			}
-
-			// Layout
-			GroupLayout layout = new GroupLayout(this);
-			layout.setAutoCreateGaps(true);
-			layout.setAutoCreateContainerGaps(true);
-			setLayout(layout);
-
-			layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-					.addComponent(algoComboBox)
-					.addComponent(separator)
-					.addComponent(algoParamPane)
-			);
-
-			layout.setVerticalGroup(layout.createSequentialGroup()
-					.addComponent(algoComboBox)
-					.addComponent(separator)
-					.addComponent(algoParamPane)
-			);
-		}
-	}
-
-	private class ControlPane extends JPanel {
-		public ControlPane() {
-			// Components
-			JButton runButton = new JButton("Run");
-			JButton resetButton = new JButton("Reset");
-
-			JLabel iterationsLabel = new JLabel();
-
-			// Canned
-			iterationsLabel.setText("Iterations: 1626");
-
-			// Layout
-			GroupLayout layout = new GroupLayout(this);
-			layout.setAutoCreateGaps(true);
-			layout.setAutoCreateContainerGaps(true);
-			setLayout(layout);
-
-			layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-					.addGroup(layout.createSequentialGroup()
-							.addComponent(runButton)
-							.addComponent(resetButton)
-					)
-					.addComponent(iterationsLabel)
-					.addGap(0, 0, Integer.MAX_VALUE) // Force horizontal expansion
-			);
-
-			layout.setVerticalGroup(layout.createSequentialGroup()
-					.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-							.addComponent(runButton)
-							.addComponent(resetButton)
-					)
-					.addComponent(iterationsLabel)
-			);
-		}
-	}
-
-	private class VisualizationPane extends JPanel {
+	public class VisualizationPane extends JPanel {
 		public VisualizationPane() {
 			// Components
 			JPanel drawingPane = new JPanel(); // ...

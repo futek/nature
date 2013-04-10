@@ -1,6 +1,7 @@
 package nature;
 
 import java.awt.geom.Point2D;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -18,7 +19,7 @@ public class Permutation {
 		this.permutation = permutation;
 	}
 
-	public Permutation(String stream) throws IllegalArgumentException {
+	public Permutation(InputStream stream) throws IllegalArgumentException {
 		// Load graph
 		try {
 			Scanner scanner = new Scanner(stream);
@@ -120,5 +121,9 @@ public class Permutation {
 			sb.append(" --> (" + node.x + "," + node.y + ")");
 		}
 		return sb.toString();
+	}
+
+	public int numberOfNodes() {
+		return permutation.length;
 	}
 }

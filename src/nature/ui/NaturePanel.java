@@ -15,7 +15,7 @@ public class NaturePanel extends JPanel {
 		PermutationPanel permutationPanel = new PermutationPanel();
 
 		new BitStringPanelController(bitStringPanel);
-		//new PermutationPanelController(permutationPanel);
+		new PermutationPanelController(permutationPanel);
 
 		tabbedPane.addTab("Bit String", bitStringPanel);
 		tabbedPane.addTab("Permutation", permutationPanel);
