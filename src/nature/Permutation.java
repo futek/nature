@@ -11,8 +11,9 @@ import java.util.Scanner;
 public class Permutation {
 	private static final Random random = new Random();
 
-	List<Point2D.Double> graph = new ArrayList<Point2D.Double>();
-	int[] permutation;
+	private List<Point2D.Double> graph = new ArrayList<Point2D.Double>();
+	private int[] permutation;
+	private Point2D.Double minBounds, maxBounds;
 
 	public Permutation(List<Point2D.Double> graph, int[] permutation) {
 		this.graph = graph;
@@ -31,6 +32,24 @@ public class Permutation {
 			scanner.close();
 		} catch (InputMismatchException e) {
 			throw new IllegalArgumentException("Invalid format");
+		}
+
+		// Calculate min/max bounds
+		double minX = graph.get(0).x;
+		double minY = graph.get(0).y;
+		double maxX = minX;
+		double maxY = minY;
+
+		for (int i = 1; i < graph.size(); i++) {
+			Point2D.Double point = graph.get(i);
+
+			if (point.x < minX) minX = point.x;
+			if (point.y < minY) minY = point.y;
+			if (point.x > maxX) maxX = point.x;
+			if (point.y > maxY) maxY = point.y;
+
+			minBounds = new Point2D.Double(minX, minY);
+			maxBounds = new Point2D.Double(maxX, maxY);
 		}
 
 		// Initial permutation
@@ -125,5 +144,21 @@ public class Permutation {
 
 	public int numberOfNodes() {
 		return permutation.length;
+	}
+
+	public int[] getPermutation() {
+		return permutation;
+	}
+
+	public List<Point2D.Double> getGraph() {
+		return graph;
+	}
+
+	public Point2D.Double getMinBounds() {
+		return minBounds;
+	}
+
+	public Point2D.Double getMaxBounds() {
+		return maxBounds;
 	}
 }

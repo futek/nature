@@ -54,6 +54,7 @@ public class PermutationPanelController {
 						startState = new Permutation(stream);
 						view.initializationPane.statusLabel.setText("Status: Graph loaded (" + startState.numberOfNodes() + " nodes)");
 						view.controlPane.controlButton.setEnabled(true);
+						view.visualizationPane.drawingPane.setPermutation(startState);
 					} catch (IllegalArgumentException | FileNotFoundException e) {
 						view.initializationPane.statusLabel.setText("Status: " + e.getMessage());
 					}

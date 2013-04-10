@@ -105,11 +105,11 @@ public class PermutationPanel extends JPanel {
 	}
 
 	public class VisualizationPane extends JPanel {
+		public GraphVisualizer drawingPane;
+
 		public VisualizationPane() {
 			// Components
-			JPanel drawingPane = new JPanel(); // ...
-
-			// Canned
+			drawingPane = new GraphVisualizer();
 			drawingPane.setBackground(new Color(255, 255, 255));
 			drawingPane.setMinimumSize(new Dimension(400, 200));
 
