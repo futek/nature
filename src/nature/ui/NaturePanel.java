@@ -6,13 +6,15 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 public class NaturePanel extends JPanel {
+	public final PermutationPanel permutationPanel = new PermutationPanel();
+	public final BitStringPanel bitStringPanel = new BitStringPanel();
 	public NaturePanel() {
 		super(new GridLayout(1, 1));
 
 		JTabbedPane tabbedPane = new JTabbedPane();
 
-		BitStringPanel bitStringPanel = new BitStringPanel();
-		PermutationPanel permutationPanel = new PermutationPanel();
+		
+		
 
 		new BitStringPanelController(bitStringPanel);
 		new PermutationPanelController(permutationPanel);

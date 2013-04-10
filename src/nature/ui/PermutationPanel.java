@@ -33,8 +33,7 @@ public class PermutationPanel extends JPanel {
 		addSection("Initialization", initializationPane);
 		addSection("Fitness Goal", fitnessPane);
 		addSection("Algorithm", algorithmPane);
-		addSection("Control", controlPane);
-		addSection("Visualization", visualizationPane);
+		addSection("Control", controlPane);		
 	}
 
 	private void addSection(String title, JComponent component) {
