@@ -9,7 +9,7 @@ public class SimulatedAnnealingBitString extends Algorithm<BitString> {
 	private int maxTime;
 	private Random random;
 
-	public SimulatedAnnealingBitString(ProgressListener<BitString> progressListener, FitnessGoal<BitString> fitnessGoal, BitString bitString, double globalMutationProbability, double initialTemperature, int maxTime) {
+	public SimulatedAnnealingBitString(ProgressListener<BitString> progressListener, FitnessGoal<BitString> fitnessGoal, BitString bitString, double initialTemperature, int maxTime) {
 		super(progressListener);
 		
 		this.initialTemperature = initialTemperature;
