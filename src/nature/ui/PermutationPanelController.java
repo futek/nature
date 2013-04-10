@@ -42,7 +42,6 @@ public class PermutationPanelController {
 
 		@Override
 		public void actionPerformed(ActionEvent evt) {
-			System.out.println("actionCommand: " + evt.getActionCommand());
 			if (evt.getActionCommand().equals("Load Graph")) {
 				int returnVal = fileChooser.showOpenDialog(view);
 
