@@ -109,4 +109,16 @@ public class Permutation {
 
 		return new Permutation(graph, mutation);
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		Point2D.Double node = graph.get(permutation[0]);
+		sb.append("(" + node.x + "," + node.y + ")");
+		for (int i = 1; i < permutation.length; i++) {
+			node = graph.get(permutation[i]);
+			sb.append(" --> (" + node.x + "," + node.y + ")");
+		}
+		return sb.toString();
+	}
 }
