@@ -34,6 +34,7 @@ public class PermutationPanelController {
 		view.controlPane.controlButton.addActionListener(controlPaneHandler);
 		view.controlPane.resetButton.addActionListener(controlPaneHandler);
 		view.controlPane.sleepSlider.addChangeListener(controlPaneHandler);
+		view.controlPane.controlButton.setEnabled(false);
 	}
 
 	private class InitializationPaneHandler implements ActionListener {
@@ -52,6 +53,7 @@ public class PermutationPanelController {
 						InputStream stream = new FileInputStream(file);
 						startState = new Permutation(stream);
 						view.initializationPane.statusLabel.setText("Status: Graph loaded (" + startState.numberOfNodes() + " nodes)");
+						view.controlPane.controlButton.setEnabled(true);
 					} catch (IllegalArgumentException | FileNotFoundException e) {
 						view.initializationPane.statusLabel.setText("Status: " + e.getMessage());
 					}
