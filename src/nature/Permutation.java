@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -24,6 +25,7 @@ public class Permutation {
 		// Load graph
 		try {
 			Scanner scanner = new Scanner(stream);
+			scanner.useLocale(Locale.US);
 			while (scanner.hasNext()) {
 				double x = scanner.nextDouble();
 				double y = scanner.nextDouble();
