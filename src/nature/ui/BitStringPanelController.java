@@ -154,6 +154,11 @@ public class BitStringPanelController {
 						}
 
 						@Override
+						public double difference(BitString original, BitString mutation) {
+							return (double)(original.numberOfOnes() -  mutation.numberOfOnes());
+						}
+
+						@Override
 						public boolean isOptimal(BitString state) {
 							return state.numberOfOnes() == state.length();
 						}
@@ -163,6 +168,11 @@ public class BitStringPanelController {
 						@Override
 						public int compare(BitString original, BitString mutation) {
 							return new Integer(mutation.numberOfOnes()).compareTo(original.numberOfOnes());
+						}
+
+						@Override
+						public double difference(BitString original, BitString mutation) {
+							return (double)(mutation.numberOfOnes() - original.numberOfOnes());
 						}
 
 						@Override
@@ -182,6 +192,11 @@ public class BitStringPanelController {
 						}
 
 						@Override
+						public double difference(BitString original, BitString mutation) {
+							return (double)(original.numberOfLeadingOnes() - mutation.numberOfLeadingOnes());
+						}
+
+						@Override
 						public boolean isOptimal(BitString state) {
 							return state.numberOfOnes() == state.length();
 						}
@@ -194,8 +209,13 @@ public class BitStringPanelController {
 						}
 
 						@Override
+						public double difference(BitString original, BitString mutation) {
+							return (double)(mutation.numberOfLeadingOnes() - original.numberOfLeadingOnes());
+						}
+
+						@Override
 						public boolean isOptimal(BitString state) {
-							return state.numberOfOnes() == 0;
+							return state.numberOfLeadingOnes() == 0;
 						}
 					};
 				}
