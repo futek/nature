@@ -72,12 +72,40 @@ public class BitString {
 		return (avg - min) / diff;
 	}
 
-	public BitString globalMutation(double probability) {
-		boolean[] mutation = new boolean[string.length];
-		for (int i = 0; i < string.length; i++) {
-			mutation[i] = (random.nextDouble() >= probability ? string[i] : !string[i]);
+	private int nextPos = -1;
+
+	private int getNextPos(int length, double l) {
+		if (nextPos >= 0) {
+			return savePos(nextPos, length);
 		}
-		return new BitString(mutation);
+		nextPos = (int) Math.floor(Math.log(random.nextDouble()) / l);
+		return savePos(nextPos, length);
+	}
+
+	private int savePos(int pos, int length) {
+		if (pos > length) {
+			nextPos = pos - length - 1;
+			return -1;
+		}
+
+		nextPos = -1;
+		return pos;
+	}
+
+	public BitString globalMutation(double probability) {
+		int start = 0;
+		double l = Math.log(1.0 - probability);
+		int next = getNextPos(string.length - 1, l);
+		if (next != -1) {
+			boolean[] mutation = Arrays.copyOf(string, string.length);
+			while (next != -1) {
+				mutation[start + next] = !string[start + next];
+				start += next + 1;
+				next = getNextPos(string.length - start - 1, l);
+			}
+			return new BitString(mutation);
+		}
+		return new BitString(string);
 	}
 
 	public BitString localMutation() {
