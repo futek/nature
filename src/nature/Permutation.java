@@ -16,9 +16,11 @@ public class Permutation {
 	private int[] permutation;
 	private Point2D.Double minBounds, maxBounds;
 
-	public Permutation(List<Point2D.Double> graph, int[] permutation) {
+	public Permutation(List<Point2D.Double> graph, int[] permutation, Point2D.Double minBounds, Point2D.Double maxBounds) {
 		this.graph = graph;
 		this.permutation = permutation;
+		this.minBounds = minBounds;
+		this.maxBounds = maxBounds;
 	}
 
 	public Permutation(InputStream stream) throws IllegalArgumentException {
@@ -49,15 +51,23 @@ public class Permutation {
 			if (point.y < minY) minY = point.y;
 			if (point.x > maxX) maxX = point.x;
 			if (point.y > maxY) maxY = point.y;
-
-			minBounds = new Point2D.Double(minX, minY);
-			maxBounds = new Point2D.Double(maxX, maxY);
 		}
+
+		minBounds = new Point2D.Double(minX, minY);
+		maxBounds = new Point2D.Double(maxX, maxY);
 
 		// Initial permutation
 		permutation = new int[graph.size()];
 		for (int i = 0; i < permutation.length; i++) {
 			permutation[i] = i;
+		}
+
+		// Debug: shuffle permutation a bit
+		for (int i = 0; i < permutation.length; i++) {
+			int j = i + random.nextInt(permutation.length - i);
+			int tmp = permutation[i];
+			permutation[i] = permutation[j];
+			permutation[j] = tmp;
 		}
 	}
 
@@ -77,9 +87,7 @@ public class Permutation {
 		return length;
 	}
 
-	public Permutation twoOpt(Permutation p) {
-		int[] permutation = p.permutation;
-
+	public Permutation twoOpt() {
 		int n = permutation.length;
 
 		int[] mutation = new int[n];
@@ -99,12 +107,10 @@ public class Permutation {
 			mutation[i] = permutation[i];
 		}
 
-		return new Permutation(graph, mutation);
+		return new Permutation(graph, mutation, minBounds, maxBounds);
 	}
 
-	public Permutation threeOpt(Permutation p) {
-		int[] permutation = p.permutation;
-
+	public Permutation threeOpt() {
 		int n = permutation.length;
 
 		int[] mutation = new int[n];
@@ -129,7 +135,7 @@ public class Permutation {
 			mutation[i] = permutation[i];
 		}
 
-		return new Permutation(graph, mutation);
+		return new Permutation(graph, mutation, minBounds, maxBounds);
 	}
 
 	@Override

@@ -13,6 +13,7 @@ import javax.swing.event.ChangeListener;
 
 import nature.Algorithm;
 import nature.FitnessGoal;
+import nature.OnePlusOnePermutation;
 import nature.Permutation;
 import nature.ProgressListener;
 
@@ -163,7 +164,7 @@ public class PermutationPanelController {
 
 		@Override
 		public void select(Permutation state) {
-			// view.visualizationPane.onionVisualizer.addPoint(state);
+			view.visualizationPane.drawingPane.setPermutation(state);
 		}
 
 		@Override
@@ -184,25 +185,35 @@ public class PermutationPanelController {
 				if (goalSelection.equals("Maximize")) {
 					fitnessGoal = new FitnessGoal<Permutation>() {
 						@Override
-						public int compare(Permutation original, Permutation mutation) {
-							return new Double(original.lengthOfTour()).compareTo(mutation.lengthOfTour());
+						public double evaluate(Permutation permutation) {
+							return permutation.lengthOfTour();
 						}
 
 						@Override
-						public double difference(Permutation original, Permutation mutation) {
-							return original.lengthOfTour() - mutation.lengthOfTour();
+						public int compare(double originalFitness, double mutationFitness) {
+							return new Double(originalFitness).compareTo(mutationFitness);
+						}
+
+						@Override
+						public double difference(double originalFitness, double mutationFitness) {
+							return (double)(originalFitness - mutationFitness);
 						}
 					};
 				} else {
 					fitnessGoal = new FitnessGoal<Permutation>() {
 						@Override
-						public int compare(Permutation original, Permutation mutation) {
-							return new Double(mutation.lengthOfTour()).compareTo(original.lengthOfTour());
+						public double evaluate(Permutation permutation) {
+							return permutation.lengthOfTour();
 						}
 
 						@Override
-						public double difference(Permutation original, Permutation mutation) {
-							return mutation.lengthOfTour() - original.lengthOfTour();
+						public int compare(double originalFitness, double mutationFitness) {
+							return new Double(mutationFitness).compareTo(originalFitness);
+						}
+
+						@Override
+						public double difference(double originalFitness, double mutationFitness) {
+							return (double)(mutationFitness - originalFitness);
 						}
 					};
 				}
@@ -213,7 +224,6 @@ public class PermutationPanelController {
 	}
 
 	private Algorithm<Permutation> getAlgorithm(FitnessGoal<Permutation> fitnessGoal, Permutation startState) {
-		// TODO: Implement
-		return null;
+		return new OnePlusOnePermutation(new ProgressHandler(), fitnessGoal, startState);
 	}
 }

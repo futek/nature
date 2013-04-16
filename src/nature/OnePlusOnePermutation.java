@@ -1,16 +1,18 @@
 package nature;
 
-public class OnePlusOneBitString extends Algorithm<BitString> {
-	private FitnessGoal<BitString> fitnessGoal;
-	private BitString current;
-	private double globalMutationProbability;
+import java.util.Random;
 
-	public OnePlusOneBitString(ProgressListener<BitString> progressListener, FitnessGoal<BitString> fitnessGoal, BitString bitString, double globalMutationProbability) {
+public class OnePlusOnePermutation extends Algorithm<Permutation> {
+	private static final Random random = new Random();
+	
+	private FitnessGoal<Permutation> fitnessGoal;
+	private Permutation current;
+
+	public OnePlusOnePermutation(ProgressListener<Permutation> progressListener, FitnessGoal<Permutation> fitnessGoal, Permutation permutation) {
 		super(progressListener);
 
 		this.fitnessGoal = fitnessGoal;
-		this.current = bitString;
-		this.globalMutationProbability = globalMutationProbability;
+		this.current = permutation;
 	}
 
 	@Override
@@ -19,7 +21,7 @@ public class OnePlusOneBitString extends Algorithm<BitString> {
 
 	@Override
 	public void step(long iteration) {
-		BitString mutation = current.globalMutation(globalMutationProbability);
+		Permutation mutation = (random.nextDouble() < 0.5 ? current.twoOpt() : current.threeOpt());
 
 		double currentFitness = fitnessGoal.evaluate(current);
 		double mutationFitness = fitnessGoal.evaluate(mutation);

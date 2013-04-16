@@ -151,35 +151,45 @@ public class BitStringPanelController {
 				if (goalSelection.equals("Maximize")) {
 					fitnessGoal = new FitnessGoal<BitString>() {
 						@Override
-						public int compare(BitString original, BitString mutation) {
-							return new Integer(original.numberOfOnes()).compareTo(mutation.numberOfOnes());
+						public double evaluate(BitString bitString) {
+							return bitString.numberOfOnes();
 						}
 
 						@Override
-						public double difference(BitString original, BitString mutation) {
-							return (double)(original.numberOfOnes() -  mutation.numberOfOnes());
+						public int compare(double originalFitness, double mutationFitness) {
+							return new Double(originalFitness).compareTo(mutationFitness);
 						}
 
 						@Override
-						public boolean isOptimal(BitString state) {
-							return state.numberOfOnes() == state.length();
+						public double difference(double originalFitness, double mutationFitness) {
+							return (double)(originalFitness - mutationFitness);
+						}
+
+						@Override
+						public boolean isOptimal(BitString bitString, double fitness) {
+							return fitness == bitString.length();
 						}
 					};
 				} else {
 					fitnessGoal = new FitnessGoal<BitString>() {
 						@Override
-						public int compare(BitString original, BitString mutation) {
-							return new Integer(mutation.numberOfOnes()).compareTo(original.numberOfOnes());
+						public double evaluate(BitString bitString) {
+							return bitString.numberOfOnes();
 						}
 
 						@Override
-						public double difference(BitString original, BitString mutation) {
-							return (double)(mutation.numberOfOnes() - original.numberOfOnes());
+						public int compare(double originalFitness, double mutationFitness) {
+							return new Double(mutationFitness).compareTo(originalFitness);
 						}
 
 						@Override
-						public boolean isOptimal(BitString state) {
-							return state.numberOfOnes() == 0;
+						public double difference(double originalFitness, double mutationFitness) {
+							return (double)(mutationFitness - originalFitness);
+						}
+
+						@Override
+						public boolean isOptimal(BitString bitString, double fitness) {
+							return fitness == 0;
 						}
 					};
 				}
@@ -189,35 +199,45 @@ public class BitStringPanelController {
 				if (goalSelection.equals("Maximize")) {
 					fitnessGoal = new FitnessGoal<BitString>() {
 						@Override
-						public int compare(BitString original, BitString mutation) {
-							return new Integer(original.numberOfLeadingOnes()).compareTo(mutation.numberOfLeadingOnes());
+						public double evaluate(BitString bitString) {
+							return bitString.numberOfLeadingOnes();
 						}
 
 						@Override
-						public double difference(BitString original, BitString mutation) {
-							return (double)(original.numberOfLeadingOnes() - mutation.numberOfLeadingOnes());
+						public int compare(double originalFitness, double mutationFitness) {
+							return new Double(originalFitness).compareTo(mutationFitness);
 						}
 
 						@Override
-						public boolean isOptimal(BitString state) {
-							return state.numberOfOnes() == state.length();
+						public double difference(double originalFitness, double mutationFitness) {
+							return (double)(originalFitness - mutationFitness);
+						}
+
+						@Override
+						public boolean isOptimal(BitString bitString, double fitness) {
+							return fitness == bitString.length();
 						}
 					};
 				} else {
 					fitnessGoal = new FitnessGoal<BitString>() {
 						@Override
-						public int compare(BitString original, BitString mutation) {
-							return new Integer(mutation.numberOfLeadingOnes()).compareTo(original.numberOfLeadingOnes());
+						public double evaluate(BitString bitString) {
+							return bitString.numberOfLeadingOnes();
 						}
 
 						@Override
-						public double difference(BitString original, BitString mutation) {
-							return (double)(mutation.numberOfLeadingOnes() - original.numberOfLeadingOnes());
+						public int compare(double originalFitness, double mutationFitness) {
+							return new Double(mutationFitness).compareTo(originalFitness);
 						}
 
 						@Override
-						public boolean isOptimal(BitString state) {
-							return state.numberOfLeadingOnes() == 0;
+						public double difference(double originalFitness, double mutationFitness) {
+							return (double)(mutationFitness - originalFitness);
+						}
+
+						@Override
+						public boolean isOptimal(BitString bitString, double fitness) {
+							return fitness == 0;
 						}
 					};
 				}

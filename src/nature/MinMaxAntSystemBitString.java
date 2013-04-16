@@ -29,7 +29,6 @@ public class MinMaxAntSystemBitString extends Algorithm<BitString> {
 		}
 	}
 
-
 	@Override
 	public void init() {
 		pheromone = new double[current.length()];
@@ -41,19 +40,19 @@ public class MinMaxAntSystemBitString extends Algorithm<BitString> {
 	public void step(long iteration) {
 		BitString mutation = current.constructMutation(pheromone);
 
+		double currentFitness = fitnessGoal.evaluate(current);
+		double mutationFitness = fitnessGoal.evaluate(mutation);
 
-		if (fitnessGoal.compare(current, mutation) <= 0) {
+		if (fitnessGoal.compare(currentFitness, mutationFitness) <= 0) {
 			current = mutation;
 
 			progressListener.select(current);
-			if (fitnessGoal.isOptimal(current)) {
+			if (fitnessGoal.isOptimal(current, currentFitness)) {
 				progressListener.done();
 				cancel();
 			}
 		}
 
 		updatePheromones(current);
-
-
 	}
 }
