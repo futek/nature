@@ -34,7 +34,6 @@ public class BitStringPanel extends JPanel {
 		addSection("Fitness Goal", fitnessPane);
 		addSection("Algorithm", algorithmPane);
 		addSection("Control", controlPane);
-		addSection("Visualization", visualizationPane);
 	}
 
 	private void addSection(String title, JComponent component) {
