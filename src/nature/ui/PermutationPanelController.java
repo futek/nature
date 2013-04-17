@@ -163,7 +163,8 @@ public class PermutationPanelController {
 		}
 
 		@Override
-		public void select(Permutation state) {
+		public void select(Permutation state, int fitness) {
+			view.fitnessPane.currentFitnessLabel.setText("Current fitness: " + fitness);
 			view.visualizationPane.drawingPane.setPermutation(state);
 		}
 

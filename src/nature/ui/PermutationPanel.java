@@ -33,7 +33,7 @@ public class PermutationPanel extends JPanel {
 		addSection("Initialization", initializationPane);
 		addSection("Fitness Goal", fitnessPane);
 		addSection("Algorithm", algorithmPane);
-		addSection("Control", controlPane);		
+		addSection("Control", controlPane);
 	}
 
 	private void addSection(String title, JComponent component) {
@@ -74,6 +74,7 @@ public class PermutationPanel extends JPanel {
 
 	public class FitnessPane extends JPanel {
 		public JComboBox<String> goalComboBox, funcComboBox;
+		public JLabel currentFitnessLabel;
 
 		public FitnessPane() {
 			// Components
@@ -85,20 +86,28 @@ public class PermutationPanel extends JPanel {
 			funcComboBox = new JComboBox<String>();
 			funcComboBox.addItem("length of tour");
 
+			currentFitnessLabel = new JLabel("Current fitness: ");
+
 			// Layout
 			GroupLayout layout = new GroupLayout(this);
 			layout.setAutoCreateGaps(true);
 			layout.setAutoCreateContainerGaps(true);
 			setLayout(layout);
 
-			layout.setHorizontalGroup(layout.createSequentialGroup()
-					.addComponent(goalComboBox)
-					.addComponent(funcComboBox)
+			layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+					.addGroup(layout.createSequentialGroup()
+							.addComponent(goalComboBox)
+							.addComponent(funcComboBox)
+					)
+					.addComponent(currentFitnessLabel)
 			);
 
-			layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-					.addComponent(goalComboBox)
-					.addComponent(funcComboBox)
+			layout.setVerticalGroup(layout.createSequentialGroup()
+					.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(goalComboBox)
+							.addComponent(funcComboBox)
+					)
+					.addComponent(currentFitnessLabel)
 			);
 		}
 	}

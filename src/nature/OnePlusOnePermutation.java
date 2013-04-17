@@ -31,7 +31,7 @@ public class OnePlusOnePermutation extends Algorithm<Permutation> {
 
 			System.out.println("Fitness: " + currentFitness);
 
-			progressListener.select(current);
+			progressListener.select(current, currentFitness);
 			if (fitnessGoal.isOptimal(current, currentFitness)) {
 				progressListener.done();
 				cancel();

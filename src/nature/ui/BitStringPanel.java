@@ -109,18 +109,19 @@ public class BitStringPanel extends JPanel {
 
 	class FitnessPane extends JPanel {
 		public JComboBox<String> goalComboBox, funcComboBox;
+		public JLabel currentFitnessLabel;
 
 		public FitnessPane() {
 			// Components
 			goalComboBox = new JComboBox<String>();
-			funcComboBox = new JComboBox<String>();
-
-			// Canned
 			goalComboBox.addItem("Maximize");
 			goalComboBox.addItem("Minimize");
 
+			funcComboBox = new JComboBox<String>();
 			funcComboBox.addItem("number of ones");
 			funcComboBox.addItem("number of leading ones");
+
+			currentFitnessLabel = new JLabel("Current fitness: ");
 
 			// Layout
 			GroupLayout layout = new GroupLayout(this);
@@ -128,14 +129,20 @@ public class BitStringPanel extends JPanel {
 			layout.setAutoCreateContainerGaps(true);
 			setLayout(layout);
 
-			layout.setHorizontalGroup(layout.createSequentialGroup()
-					.addComponent(goalComboBox)
-					.addComponent(funcComboBox)
+			layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+					.addGroup(layout.createSequentialGroup()
+							.addComponent(goalComboBox)
+							.addComponent(funcComboBox)
+					)
+					.addComponent(currentFitnessLabel)
 			);
 
-			layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-					.addComponent(goalComboBox)
-					.addComponent(funcComboBox)
+			layout.setVerticalGroup(layout.createSequentialGroup()
+					.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(goalComboBox)
+							.addComponent(funcComboBox)
+					)
+					.addComponent(currentFitnessLabel)
 			);
 		}
 	}

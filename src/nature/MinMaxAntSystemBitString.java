@@ -44,7 +44,7 @@ public class MinMaxAntSystemBitString extends Algorithm<BitString> {
 		if (fitnessGoal.compare(currentFitness, mutationFitness) <= 0) {
 			current = mutation;
 
-			progressListener.select(current);
+			progressListener.select(current, currentFitness);
 			if (fitnessGoal.isOptimal(current, currentFitness)) {
 				progressListener.done();
 				cancel();

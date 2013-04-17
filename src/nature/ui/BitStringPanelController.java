@@ -147,7 +147,8 @@ public class BitStringPanelController {
 		}
 
 		@Override
-		public void select(BitString state) {
+		public void select(BitString state, int fitness) {
+			view.fitnessPane.currentFitnessLabel.setText("Current fitness: " + fitness);
 			view.visualizationPane.onionVisualizer.addPoint(state);
 		}
 

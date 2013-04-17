@@ -42,7 +42,7 @@ public class SimulatedAnnealingBitString extends Algorithm<BitString> {
 		if (random.nextDouble() < probability) {
 			current = mutation;
 
-			progressListener.select(current);
+			progressListener.select(current, currentFitness);
 			if (fitnessGoal.isOptimal(current, currentFitness)) {
 				progressListener.done();
 				cancel();
