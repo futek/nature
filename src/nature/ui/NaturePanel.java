@@ -39,6 +39,7 @@ public class NaturePanel extends JPanel {
 				Nature.visualizationPanel.add(permutationPanel.visualizationPane);
 			}
 
+			Nature.frame.pack();
 			Nature.visualizationPanel.revalidate();
 			Nature.visualizationPanel.repaint();
 		}
