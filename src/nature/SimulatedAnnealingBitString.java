@@ -19,11 +19,11 @@ public class SimulatedAnnealingBitString extends Algorithm<BitString> {
 		this.current = bitString;
 	}
 
-	private double temperature(double time) {
+	private double temperature(long time) {
 		return initialTemperature - time * (initialTemperature / maxTime);
 	}
 
-	private double alpha(double time) {
+	private double alpha(long time) {
 		return Math.exp(1.0 / temperature(time));
 	}
 
@@ -32,7 +32,7 @@ public class SimulatedAnnealingBitString extends Algorithm<BitString> {
 	}
 
 	@Override
-	public void step(long iteration) {
+	public void step(long iteration) {		
 		BitString mutation = current.localMutation();
 
 		int currentFitness = fitnessGoal.evaluate(current);
@@ -47,6 +47,11 @@ public class SimulatedAnnealingBitString extends Algorithm<BitString> {
 				progressListener.done();
 				cancel();
 			}
+		}
+		
+		if (iteration >= maxTime) {
+			progressListener.done();
+			cancel();
 		}
 	}
 }
