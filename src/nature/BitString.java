@@ -42,8 +42,8 @@ public class BitString {
 	public int numberOfLeadingOnes() {
 		int ones = 0;
 		for (boolean bit : string) {
-			ones++;
 			if (!bit) return ones;
+			ones++;
 		}
 		return ones;
 	}
