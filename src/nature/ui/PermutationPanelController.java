@@ -13,6 +13,7 @@ import javax.swing.event.ChangeListener;
 
 import nature.Algorithm;
 import nature.FitnessGoal;
+import nature.Nature;
 import nature.OnePlusOnePermutation;
 import nature.Permutation;
 import nature.ProgressListener;
@@ -86,11 +87,8 @@ public class PermutationPanelController {
 						view.algorithmPane.algoMMASParams.setVisible(true);
 						break;
 				}
-
-				view.repaint();
-				view.revalidate();
-				view.repaint();
-				view.revalidate();
+				
+				Nature.frame.pack();
 			}
 		}
 	}

@@ -3,6 +3,7 @@ package nature.ui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -10,6 +11,7 @@ import nature.Algorithm;
 import nature.BitString;
 import nature.FitnessGoal;
 import nature.MinMaxAntSystemBitString;
+import nature.Nature;
 import nature.OnePlusOneBitString;
 import nature.ProgressListener;
 import nature.SimulatedAnnealingBitString;
@@ -66,11 +68,8 @@ public class BitStringPanelController {
 						view.algorithmPane.algoMMASParams.setVisible(true);
 						break;
 				}
-
-				view.repaint();
-				view.revalidate();
-				view.repaint();
-				view.revalidate();
+				
+				Nature.frame.pack();
 			}
 		}
 	}
