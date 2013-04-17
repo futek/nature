@@ -12,9 +12,9 @@ import javax.swing.JTextField;
 class AlgorithmPane extends JPanel {
 	public JComboBox<String> algoComboBox;
 	public JPanel algoEAParams, algoSAParams, algoMMASParams;
-	public JTextField timeField, initTempField, finalTempField, evaporationFactorField;
+	public JTextField globalMutationProbField, timeField, initTempField, finalTempField, evaporationFactorField;
 	private JComboBox<String> coolingComboBox;
-	
+
 	public AlgorithmPane() {
 		// Components
 		algoComboBox = new JComboBox<String>();
@@ -40,17 +40,17 @@ class AlgorithmPane extends JPanel {
 			algoEAParams.setLayout(layout);
 
 			// TODO: Parse using as javascript using Rhino?
-			JLabel label = new JLabel("Local mutation probability:");
-			JTextField field = new JTextField("1/n");
+			JLabel globalMutationProblabel = new JLabel("Global mutation probability:");
+			globalMutationProbField = new JTextField("1/n");
 
 			layout.setHorizontalGroup(layout.createSequentialGroup()
-					.addComponent(label)
-					.addComponent(field)
+					.addComponent(globalMutationProblabel)
+					.addComponent(globalMutationProbField)
 			);
 
 			layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-					.addComponent(label)
-					.addComponent(field)
+					.addComponent(globalMutationProblabel)
+					.addComponent(globalMutationProbField)
 			);
 		}
 
