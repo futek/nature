@@ -273,11 +273,14 @@ public class BitStringPanelController {
 			case "(1+1) Evolutionary Algorithm":
 				algorithm = new OnePlusOneBitString(new ProgressHandler(), fitnessGoal, startState, 1.0 / startState.length()); // TODO: Read parameter
 				break;
-			case "Simulated Annealing":
-				algorithm = new SimulatedAnnealingBitString(new ProgressHandler(), fitnessGoal, startState, 0.01, 100000); // TODO: Read parameter
+			case "Simulated Annealing": // TODO: Handle invalid numbers
+			int maxTime = Integer.parseInt(view.algorithmPane.timeField.getText());
+			double initialTemperature = Integer.parseInt(view.algorithmPane.initTempField.getText());
+			algorithm = new SimulatedAnnealingBitString(new ProgressHandler(), fitnessGoal, startState, initialTemperature, maxTime); // TODO: Read parameter
 				break;
-			case "Min-Max Ant System":
-				algorithm = new MinMaxAntSystemBitString(new ProgressHandler(), fitnessGoal, startState, 0.01);
+			case "Min-Max Ant System": // TODO: Handle invalid numbers
+				double evaporationFactor = Integer.parseInt(view.algorithmPane.evaporationFactorField.getText());
+				algorithm = new MinMaxAntSystemBitString(new ProgressHandler(), fitnessGoal, startState, evaporationFactor);
 				break;
 		}
 

@@ -12,7 +12,9 @@ import javax.swing.JTextField;
 class AlgorithmPane extends JPanel {
 	public JComboBox<String> algoComboBox;
 	public JPanel algoEAParams, algoSAParams, algoMMASParams;
-
+	public JTextField timeField, initTempField, finalTempField, evaporationFactorField;
+	private JComboBox<String> coolingComboBox;
+	
 	public AlgorithmPane() {
 		// Components
 		algoComboBox = new JComboBox<String>();
@@ -60,22 +62,22 @@ class AlgorithmPane extends JPanel {
 
 			JLabel initTempLabel = new JLabel("Initial temperature:");
 			initTempLabel.setMinimumSize(new Dimension(150, 0));
-			JTextField initTempField = new JTextField("100");
+			initTempField = new JTextField("100");
 			initTempLabel.setLabelFor(initTempField);
 
 			JLabel finalTempLabel = new JLabel("Final temperature:");
 			finalTempLabel.setMinimumSize(new Dimension(150, 0));
-			JTextField finalTempField = new JTextField("0");
+			finalTempField = new JTextField("0");
 			finalTempLabel.setLabelFor(finalTempField);
 
 			JLabel timeLabel = new JLabel("Maximum time:");
 			timeLabel.setMinimumSize(new Dimension(150, 0));
-			JTextField timeField = new JTextField("1000");
+			timeField = new JTextField("1000");
 			timeLabel.setLabelFor(timeField);
 
 			// http://www.btluke.com/simanf1.html
 			JLabel coolingLabel = new JLabel("Cooling schedule:");
-			JComboBox<String> coolingComboBox = new JComboBox<String>();
+			coolingComboBox = new JComboBox<String>();
 			coolingComboBox.addItem("Cooling Schedule 0"); // TODO: Better naming?
 			coolingComboBox.addItem("Cooling Schedule 1");
 			coolingComboBox.addItem("Cooling Schedule 2");
@@ -134,16 +136,16 @@ class AlgorithmPane extends JPanel {
 			algoMMASParams.setLayout(layout);
 
 			JLabel label = new JLabel("Evaporation factor:");
-			JTextField field = new JTextField("0.01");
+			evaporationFactorField = new JTextField("0.01");
 
 			layout.setHorizontalGroup(layout.createSequentialGroup()
 					.addComponent(label)
-					.addComponent(field)
+					.addComponent(evaporationFactorField)
 			);
 
 			layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 					.addComponent(label)
-					.addComponent(field)
+					.addComponent(evaporationFactorField)
 			);
 		}
 
