@@ -45,7 +45,8 @@ public class BitStringPanel extends JPanel {
 	}
 
 	class InitializationPane extends JPanel {
-		public JTextField lengthField, probField;
+		public JTextField lengthField, probField, customField;
+		public JCheckBox customCheckBox;
 
 		public InitializationPane() {
 			// Components
@@ -58,10 +59,10 @@ public class BitStringPanel extends JPanel {
 			probLabel.setLabelFor(probField);
 
 			// TODO: Implement checkbox behavior
-			JCheckBox customCheckBox = new JCheckBox();
+			customCheckBox = new JCheckBox();
 
 			JLabel customLabel = new JLabel("Custom:");
-			JTextField customField = new JTextField();
+			customField = new JTextField();
 			customLabel.setLabelFor(customField);
 			customField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 0)); // Avoid vertical expansion
 

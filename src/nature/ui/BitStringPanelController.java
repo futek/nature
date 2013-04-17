@@ -21,14 +21,26 @@ public class BitStringPanelController {
 	public BitStringPanelController(BitStringPanel view) {
 		this.view = view;
 
+		InitializationPaneHandler initializationPaneHandler = new InitializationPaneHandler();
+		view.initializationPane.customCheckBox.addActionListener(initializationPaneHandler);
+
 		AlgorithmPaneHandler algorithmPaneHandler = new AlgorithmPaneHandler();
 		view.algorithmPane.algoComboBox.addActionListener(algorithmPaneHandler);
-
 
 		ControlPaneHandler controlPaneHandler = new ControlPaneHandler();
 		view.controlPane.controlButton.addActionListener(controlPaneHandler);
 		view.controlPane.resetButton.addActionListener(controlPaneHandler);
 		view.controlPane.sleepSlider.addChangeListener(controlPaneHandler);
+	}
+
+	private class InitializationPaneHandler implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			boolean enableCustomField = view.initializationPane.customCheckBox.isSelected();
+			view.initializationPane.lengthField.setEnabled(!enableCustomField);
+			view.initializationPane.probField.setEnabled(!enableCustomField);
+			view.initializationPane.customField.setEnabled(enableCustomField);
+		}
 	}
 
 	private class AlgorithmPaneHandler implements ActionListener {
@@ -70,10 +82,16 @@ public class BitStringPanelController {
 				case "Start":
 					FitnessGoal<BitString> fitnessGoal = getFitnessGoal();
 
-					// TODO: Handle invalid numbers...
-					int length = Integer.parseInt(view.initializationPane.lengthField.getText());
-					double prob = Double.parseDouble(view.initializationPane.probField.getText());
-					BitString startState = new BitString(length, prob);
+					BitString startState = null;
+					if (view.initializationPane.customCheckBox.isSelected()) {
+						// TODO: Handle invalid bitstrings...
+						startState = new BitString(view.initializationPane.customField.getText());
+					} else {
+						// TODO: Handle invalid numbers...
+						int length = Integer.parseInt(view.initializationPane.lengthField.getText());
+						double prob = Double.parseDouble(view.initializationPane.probField.getText());
+						startState = new BitString(length, prob);
+					}
 
 					algorithm = getAlgorithm(fitnessGoal, startState);
 					algorithm.sleep(view.controlPane.sleepSlider.getValue());
