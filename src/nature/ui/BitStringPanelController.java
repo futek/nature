@@ -275,7 +275,7 @@ public class BitStringPanelController {
 				break;
 			case "Simulated Annealing": // TODO: Handle invalid numbers
 			int maxTime = Integer.parseInt(view.algorithmPane.timeField.getText());
-			double initialTemperature = Integer.parseInt(view.algorithmPane.initTempField.getText());
+			double initialTemperature = Double.parseDouble(view.algorithmPane.initTempField.getText());
 			algorithm = new SimulatedAnnealingBitString(new ProgressHandler(), fitnessGoal, startState, initialTemperature, maxTime); // TODO: Read parameter
 				break;
 			case "Min-Max Ant System": // TODO: Handle invalid numbers
