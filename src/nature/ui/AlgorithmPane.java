@@ -45,7 +45,7 @@ class AlgorithmPane extends JPanel {
 
 			JLabel initTempLabel = new JLabel("Initial temperature:");
 			initTempLabel.setMinimumSize(new Dimension(150, 0));
-			initTempField = new JTextField("100");
+			initTempField = new JTextField("0.01");
 			initTempLabel.setLabelFor(initTempField);
 
 			JLabel finalTempLabel = new JLabel("Final temperature:");
@@ -55,7 +55,7 @@ class AlgorithmPane extends JPanel {
 
 			JLabel timeLabel = new JLabel("Maximum time:");
 			timeLabel.setMinimumSize(new Dimension(150, 0));
-			timeField = new JTextField("1000");
+			timeField = new JTextField("1337");
 			timeLabel.setLabelFor(timeField);
 
 			// http://www.btluke.com/simanf1.html
