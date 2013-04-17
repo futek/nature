@@ -279,7 +279,7 @@ public class BitStringPanelController {
 			algorithm = new SimulatedAnnealingBitString(new ProgressHandler(), fitnessGoal, startState, initialTemperature, maxTime); // TODO: Read parameter
 				break;
 			case "Min-Max Ant System": // TODO: Handle invalid numbers
-				double evaporationFactor = Integer.parseInt(view.algorithmPane.evaporationFactorField.getText());
+				double evaporationFactor = Double.parseDouble(view.algorithmPane.evaporationFactorField.getText());
 				algorithm = new MinMaxAntSystemBitString(new ProgressHandler(), fitnessGoal, startState, evaporationFactor);
 				break;
 		}
