@@ -1,7 +1,5 @@
 package nature;
 
-
-
 public class MinMaxAntSystemBitString extends Algorithm<BitString> {
 	private FitnessGoal<BitString> fitnessGoal;
 	private BitString current;
