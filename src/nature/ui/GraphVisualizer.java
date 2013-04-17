@@ -13,10 +13,10 @@ import javax.swing.JPanel;
 import nature.Permutation;
 
 public class GraphVisualizer extends JPanel {
-	private static final int NODE_SIZE = 16;
+	private static final int NODE_SIZE = 8;
 	private static final Color NODE_COLOR = new Color(255, 0, 0);
 	private static final Color LINE_COLOR = new Color(0, 0, 0);
-	private static int padding = NODE_SIZE * 2;
+	private static int padding = 32;
 
 	private Permutation permutation;
 
