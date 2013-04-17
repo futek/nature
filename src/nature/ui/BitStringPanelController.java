@@ -169,44 +169,44 @@ public class BitStringPanelController {
 				if (goalSelection.equals("Maximize")) {
 					fitnessGoal = new FitnessGoal<BitString>() {
 						@Override
-						public double evaluate(BitString bitString) {
+						public int evaluate(BitString bitString) {
 							return bitString.numberOfOnes();
 						}
 
 						@Override
-						public int compare(double originalFitness, double mutationFitness) {
-							return new Double(originalFitness).compareTo(mutationFitness);
+						public int compare(int originalFitness, int mutationFitness) {
+							return new Integer(originalFitness).compareTo(mutationFitness);
 						}
 
 						@Override
-						public double difference(double originalFitness, double mutationFitness) {
-							return (double)(originalFitness - mutationFitness);
+						public int difference(int originalFitness, int mutationFitness) {
+							return originalFitness - mutationFitness;
 						}
 
 						@Override
-						public boolean isOptimal(BitString bitString, double fitness) {
+						public boolean isOptimal(BitString bitString, int fitness) {
 							return fitness == bitString.length();
 						}
 					};
 				} else {
 					fitnessGoal = new FitnessGoal<BitString>() {
 						@Override
-						public double evaluate(BitString bitString) {
+						public int evaluate(BitString bitString) {
 							return bitString.numberOfOnes();
 						}
 
 						@Override
-						public int compare(double originalFitness, double mutationFitness) {
-							return new Double(mutationFitness).compareTo(originalFitness);
+						public int compare(int originalFitness, int mutationFitness) {
+							return new Integer(mutationFitness).compareTo(originalFitness);
 						}
 
 						@Override
-						public double difference(double originalFitness, double mutationFitness) {
-							return (double)(mutationFitness - originalFitness);
+						public int difference(int originalFitness, int mutationFitness) {
+							return mutationFitness - originalFitness;
 						}
 
 						@Override
-						public boolean isOptimal(BitString bitString, double fitness) {
+						public boolean isOptimal(BitString bitString, int fitness) {
 							return fitness == 0;
 						}
 					};
@@ -217,44 +217,44 @@ public class BitStringPanelController {
 				if (goalSelection.equals("Maximize")) {
 					fitnessGoal = new FitnessGoal<BitString>() {
 						@Override
-						public double evaluate(BitString bitString) {
+						public int evaluate(BitString bitString) {
 							return bitString.numberOfLeadingOnes();
 						}
 
 						@Override
-						public int compare(double originalFitness, double mutationFitness) {
-							return new Double(originalFitness).compareTo(mutationFitness);
+						public int compare(int originalFitness, int mutationFitness) {
+							return new Integer(originalFitness).compareTo(mutationFitness);
 						}
 
 						@Override
-						public double difference(double originalFitness, double mutationFitness) {
-							return (double)(originalFitness - mutationFitness);
+						public int difference(int originalFitness, int mutationFitness) {
+							return originalFitness - mutationFitness;
 						}
 
 						@Override
-						public boolean isOptimal(BitString bitString, double fitness) {
+						public boolean isOptimal(BitString bitString, int fitness) {
 							return fitness == bitString.length();
 						}
 					};
 				} else {
 					fitnessGoal = new FitnessGoal<BitString>() {
 						@Override
-						public double evaluate(BitString bitString) {
+						public int evaluate(BitString bitString) {
 							return bitString.numberOfLeadingOnes();
 						}
 
 						@Override
-						public int compare(double originalFitness, double mutationFitness) {
-							return new Double(mutationFitness).compareTo(originalFitness);
+						public int compare(int originalFitness, int mutationFitness) {
+							return new Integer(mutationFitness).compareTo(originalFitness);
 						}
 
 						@Override
-						public double difference(double originalFitness, double mutationFitness) {
-							return (double)(mutationFitness - originalFitness);
+						public int difference(int originalFitness, int mutationFitness) {
+							return mutationFitness - originalFitness;
 						}
 
 						@Override
-						public boolean isOptimal(BitString bitString, double fitness) {
+						public boolean isOptimal(BitString bitString, int fitness) {
 							return fitness == 0;
 						}
 					};

@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class OnePlusOnePermutation extends Algorithm<Permutation> {
 	private static final Random random = new Random();
-	
+
 	private FitnessGoal<Permutation> fitnessGoal;
 	private Permutation current;
 
@@ -23,11 +23,13 @@ public class OnePlusOnePermutation extends Algorithm<Permutation> {
 	public void step(long iteration) {
 		Permutation mutation = (random.nextDouble() < 0.5 ? current.twoOpt() : current.threeOpt());
 
-		double currentFitness = fitnessGoal.evaluate(current);
-		double mutationFitness = fitnessGoal.evaluate(mutation);
+		int currentFitness = fitnessGoal.evaluate(current);
+		int mutationFitness = fitnessGoal.evaluate(mutation);
 
 		if (fitnessGoal.compare(currentFitness, mutationFitness) <= 0) {
 			current = mutation;
+
+			System.out.println("Fitness: " + currentFitness);
 
 			progressListener.select(current);
 			if (fitnessGoal.isOptimal(current, currentFitness)) {

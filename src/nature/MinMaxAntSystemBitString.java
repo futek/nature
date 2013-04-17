@@ -38,8 +38,8 @@ public class MinMaxAntSystemBitString extends Algorithm<BitString> {
 	public void step(long iteration) {
 		BitString mutation = current.constructMutation(pheromone);
 
-		double currentFitness = fitnessGoal.evaluate(current);
-		double mutationFitness = fitnessGoal.evaluate(mutation);
+		int currentFitness = fitnessGoal.evaluate(current);
+		int mutationFitness = fitnessGoal.evaluate(mutation);
 
 		if (fitnessGoal.compare(currentFitness, mutationFitness) <= 0) {
 			current = mutation;

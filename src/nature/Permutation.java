@@ -62,13 +62,13 @@ public class Permutation {
 			permutation[i] = i;
 		}
 
-		// Debug: shuffle permutation a bit
-		for (int i = 0; i < permutation.length; i++) {
-			int j = i + random.nextInt(permutation.length - i);
-			int tmp = permutation[i];
-			permutation[i] = permutation[j];
-			permutation[j] = tmp;
-		}
+//		// Debug: shuffle permutation a bit
+//		for (int i = 0; i < permutation.length; i++) {
+//			int j = i + random.nextInt(permutation.length - i);
+//			int tmp = permutation[i];
+//			permutation[i] = permutation[j];
+//			permutation[j] = tmp;
+//		}
 	}
 
 	public double lengthOfTour() {

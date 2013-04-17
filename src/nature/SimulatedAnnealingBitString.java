@@ -35,8 +35,8 @@ public class SimulatedAnnealingBitString extends Algorithm<BitString> {
 	public void step(long iteration) {
 		BitString mutation = current.localMutation();
 
-		double currentFitness = fitnessGoal.evaluate(current);
-		double mutationFitness = fitnessGoal.evaluate(mutation);
+		int currentFitness = fitnessGoal.evaluate(current);
+		int mutationFitness = fitnessGoal.evaluate(mutation);
 
 		double probability = Math.min(1.0, Math.pow(alpha(iteration), fitnessGoal.difference(currentFitness, mutationFitness)));
 		if (random.nextDouble() < probability) {

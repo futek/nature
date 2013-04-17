@@ -66,16 +66,7 @@ public class GraphVisualizer extends JPanel {
 			g2.drawLine(p1t.x, p1t.y,p2t.x, p2t.y);
 		}
 
-		g2.setColor(NODE_COLOR);
 
-		for (Point2D.Double p : graph) {
-//			int x = (int) ((p.x - minBounds.x) / (maxBounds.x - minBounds.x) * size.width);
-//			int y = (int) ((p.y - minBounds.y) / (maxBounds.y - minBounds.y) * size.height);
-
-			Point pt = transform(p, minBounds, maxBounds, size);
-
-			g2.fillOval(pt.x - NODE_SIZE/2, pt.y - NODE_SIZE/2, NODE_SIZE, NODE_SIZE);
-		}
 	}
 
 	public void setPermutation(Permutation permutation) {

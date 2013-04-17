@@ -1,11 +1,11 @@
 package nature;
 
 public abstract class FitnessGoal<T> {
-	public abstract double evaluate(T state);
-	public abstract int compare(double originalFitness, double mutationFitness);
-	public abstract double difference(double originalFitness, double mutationFitness);
+	public abstract int evaluate(T state);
+	public abstract int compare(int originalFitness, int mutationFitness);
+	public abstract int difference(int originalFitness, int mutationFitness);
 
-	public boolean isOptimal(T state, double fitness) {
+	public boolean isOptimal(T state, int fitness) {
 		return false;
 	}
 }

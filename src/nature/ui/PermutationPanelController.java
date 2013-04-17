@@ -185,35 +185,35 @@ public class PermutationPanelController {
 				if (goalSelection.equals("Maximize")) {
 					fitnessGoal = new FitnessGoal<Permutation>() {
 						@Override
-						public double evaluate(Permutation permutation) {
-							return permutation.lengthOfTour();
+						public int evaluate(Permutation permutation) {
+							return (int) Math.round(permutation.lengthOfTour());
 						}
 
 						@Override
-						public int compare(double originalFitness, double mutationFitness) {
-							return new Double(originalFitness).compareTo(mutationFitness);
+						public int compare(int originalFitness, int mutationFitness) {
+							return new Integer(originalFitness).compareTo(mutationFitness);
 						}
 
 						@Override
-						public double difference(double originalFitness, double mutationFitness) {
-							return (double)(originalFitness - mutationFitness);
+						public int difference(int originalFitness, int mutationFitness) {
+							return originalFitness - mutationFitness;
 						}
 					};
 				} else {
 					fitnessGoal = new FitnessGoal<Permutation>() {
 						@Override
-						public double evaluate(Permutation permutation) {
-							return permutation.lengthOfTour();
+						public int evaluate(Permutation permutation) {
+							return (int) Math.round(permutation.lengthOfTour());
 						}
 
 						@Override
-						public int compare(double originalFitness, double mutationFitness) {
-							return new Double(mutationFitness).compareTo(originalFitness);
+						public int compare(int originalFitness, int mutationFitness) {
+							return new Integer(mutationFitness).compareTo(originalFitness);
 						}
 
 						@Override
-						public double difference(double originalFitness, double mutationFitness) {
-							return (double)(mutationFitness - originalFitness);
+						public int difference(int originalFitness, int mutationFitness) {
+							return mutationFitness - originalFitness;
 						}
 					};
 				}
