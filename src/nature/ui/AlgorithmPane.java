@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 class AlgorithmPane extends JPanel {
 	public JComboBox<String> algoComboBox;
 	public JPanel algoEAParams, algoSAParams, algoMMASParams;
-	public JTextField globalMutationProbField, timeField, initTempField, finalTempField, evaporationFactorField;
+	public JTextField timeField, initTempField, finalTempField, evaporationFactorField;
 	private JComboBox<String> coolingComboBox;
 
 	public AlgorithmPane() {
@@ -34,24 +34,7 @@ class AlgorithmPane extends JPanel {
 		algoMMASParams.setVisible(false);
 
 		{
-			GroupLayout layout = new GroupLayout(algoEAParams);
-			layout.setAutoCreateGaps(true);
-			layout.setAutoCreateContainerGaps(true);
-			algoEAParams.setLayout(layout);
-
-			// TODO: Parse using as javascript using Rhino?
-			JLabel globalMutationProblabel = new JLabel("Global mutation probability:");
-			globalMutationProbField = new JTextField("1/n");
-
-			layout.setHorizontalGroup(layout.createSequentialGroup()
-					.addComponent(globalMutationProblabel)
-					.addComponent(globalMutationProbField)
-			);
-
-			layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-					.addComponent(globalMutationProblabel)
-					.addComponent(globalMutationProbField)
-			);
+			algoEAParams.setMaximumSize(new Dimension(0, 0));
 		}
 
 		{
