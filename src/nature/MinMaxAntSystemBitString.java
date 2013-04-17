@@ -9,7 +9,7 @@ public class MinMaxAntSystemBitString extends Algorithm<BitString> {
 	public MinMaxAntSystemBitString(ProgressListener<BitString> progressListener, FitnessGoal<BitString> fitnessGoal, BitString bitString, double rho) {
 		super(progressListener);
 
-		this.rho = rho;
+		this.rho = Math.max(Math.min(rho, 0.0), 1.0);
 		this.fitnessGoal = fitnessGoal;
 		this.current = bitString;
 	}
