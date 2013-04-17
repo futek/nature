@@ -10,6 +10,7 @@ import nature.ui.VisualizationPanel;
 public class Nature implements Runnable {
 	public static final NaturePanel naturePanel = new NaturePanel();
 	public static final VisualizationPanel visualizationPanel = new VisualizationPanel();
+	public static JFrame frame = new JFrame();
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Nature());
@@ -17,7 +18,6 @@ public class Nature implements Runnable {
 
 	@Override
 	public void run() {
-		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(naturePanel);
 		frame.pack();
