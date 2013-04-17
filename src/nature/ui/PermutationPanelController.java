@@ -196,7 +196,7 @@ public class PermutationPanelController {
 
 						@Override
 						public int difference(int originalFitness, int mutationFitness) {
-							return originalFitness - mutationFitness;
+							return mutationFitness - originalFitness;
 						}
 					};
 				} else {
@@ -213,7 +213,7 @@ public class PermutationPanelController {
 
 						@Override
 						public int difference(int originalFitness, int mutationFitness) {
-							return mutationFitness - originalFitness;
+							return originalFitness - mutationFitness;
 						}
 					};
 				}

@@ -180,7 +180,7 @@ public class BitStringPanelController {
 
 						@Override
 						public int difference(int originalFitness, int mutationFitness) {
-							return originalFitness - mutationFitness;
+							return mutationFitness - originalFitness;
 						}
 
 						@Override
@@ -202,7 +202,7 @@ public class BitStringPanelController {
 
 						@Override
 						public int difference(int originalFitness, int mutationFitness) {
-							return mutationFitness - originalFitness;
+							return originalFitness - mutationFitness;
 						}
 
 						@Override
@@ -228,7 +228,7 @@ public class BitStringPanelController {
 
 						@Override
 						public int difference(int originalFitness, int mutationFitness) {
-							return originalFitness - mutationFitness;
+							return mutationFitness - originalFitness;
 						}
 
 						@Override
@@ -250,7 +250,7 @@ public class BitStringPanelController {
 
 						@Override
 						public int difference(int originalFitness, int mutationFitness) {
-							return mutationFitness - originalFitness;
+							return originalFitness - mutationFitness;
 						}
 
 						@Override
