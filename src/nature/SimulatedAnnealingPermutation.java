@@ -31,6 +31,7 @@ public class SimulatedAnnealingPermutation extends Algorithm<Permutation> {
 
 	@Override
 	public void init() {
+		progressListener.select(current, fitnessGoal.evaluate(current));
 	}
 
 	@Override

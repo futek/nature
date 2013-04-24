@@ -29,6 +29,8 @@ public class MinMaxAntSystemBitString extends Algorithm<BitString> {
 
 	@Override
 	public void init() {
+		progressListener.select(current, fitnessGoal.evaluate(current));
+
 		pheromone = new double[current.length()];
 		current = current.constructMutation(pheromone);
 		updatePheromones(current);

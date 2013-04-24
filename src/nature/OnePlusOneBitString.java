@@ -15,6 +15,7 @@ public class OnePlusOneBitString extends Algorithm<BitString> {
 
 	@Override
 	public void init() {
+		progressListener.select(current, fitnessGoal.evaluate(current));
 	}
 
 	@Override
