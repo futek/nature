@@ -3,11 +3,13 @@ package nature;
 import java.awt.geom.Point2D;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Permutation {
 	private static final Random random = new Random();
@@ -134,6 +136,51 @@ public class Permutation {
 		for (int i = c + 1; i < permutation.length; i++) {
 			mutation[i] = permutation[i];
 		}
+
+		return new Permutation(graph, mutation, minBounds, maxBounds);
+	}
+
+	public Permutation constructMutation(double[][] pheromone) {
+		int[] mutation = new int[permutation.length];
+
+		Set<Integer> nonVisited = new HashSet<Integer>();
+		for (int node : permutation) {
+			nonVisited.add(node);
+		}
+
+		int v = permutation[0];
+		int i = 0;
+
+		while (nonVisited.size() > 0) {
+			mutation[i] = v;
+
+			double sum = 0;
+			for (int neighbor : nonVisited) {
+				sum += pheromone[v][neighbor];
+			}
+
+			double r = random.nextDouble();
+			int w = 0;
+
+			int j = 0;
+			int psum = 0;
+			for (int neighbor : nonVisited) {
+				double p = pheromone[v][neighbor] / sum;
+				psum += p;
+
+				if (psum < r || j == nonVisited.size() - 1) {
+					w = neighbor;
+					break;
+				}
+			}
+
+			nonVisited.remove(w);
+			v = w;
+
+			i++;
+		}
+
+		mutation[i] = v;
 
 		return new Permutation(graph, mutation, minBounds, maxBounds);
 	}
