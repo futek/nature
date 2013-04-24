@@ -13,7 +13,7 @@ class AlgorithmPane extends JPanel {
 	public JComboBox<String> algoComboBox;
 	public JPanel algoEAParams, algoSAParams, algoMMASParams;
 	public JTextField timeField, initTempField, finalTempField, evaporationFactorField;
-	private JComboBox<String> coolingComboBox;
+	public JComboBox<String> coolingComboBox;
 
 	public AlgorithmPane() {
 		// Components
