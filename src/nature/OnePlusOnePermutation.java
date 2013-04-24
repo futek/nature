@@ -29,8 +29,6 @@ public class OnePlusOnePermutation extends Algorithm<Permutation> {
 		if (fitnessGoal.compare(currentFitness, mutationFitness) <= 0) {
 			current = mutation;
 
-			System.out.println("Fitness: " + currentFitness);
-
 			progressListener.select(current, currentFitness);
 			if (fitnessGoal.isOptimal(current, currentFitness)) {
 				progressListener.done();
