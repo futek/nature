@@ -28,13 +28,14 @@ class ControlPane extends JPanel {
 
 		JLabel sleepLabel = new JLabel("Sleep (ms):");
 		sleepSlider = new JSlider(0, 100, 0);
-//		sleepSlider.addChangeListener(controller);
 		sleepSlider.setMajorTickSpacing(10);
 		sleepSlider.setMinorTickSpacing(5);
 		sleepSlider.setPaintTicks(true);
 		sleepSlider.setPaintLabels(true);
 		sleepSlider.setSnapToTicks(true);
 		sleepLabel.setLabelFor(sleepSlider);
+
+
 
 		// Defaults
 		iterationLabel.setText("Iteration: 0");

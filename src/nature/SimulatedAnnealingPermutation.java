@@ -2,11 +2,11 @@ package nature;
 
 import java.util.Random;
 
-public class SimulatedAnnealingBitString extends Algorithm<BitString> {
+public class SimulatedAnnealingPermutation extends Algorithm<Permutation> {
 	private static final Random random = new Random();
 
-	private FitnessGoal<BitString> fitnessGoal;
-	private BitString current;
+	private FitnessGoal<Permutation> fitnessGoal;
+	private Permutation current;
 	private double initialTemperature;
 	private double finalTemperature;
 	private long maxTime;
@@ -14,14 +14,14 @@ public class SimulatedAnnealingBitString extends Algorithm<BitString> {
 	private CoolingSchedule coolingSchedule;
 
 
-	public SimulatedAnnealingBitString(ProgressListener<BitString> progressListener, FitnessGoal<BitString> fitnessGoal, BitString bitString, double initialTemperature, double finalTemperature, long maxTime, CoolingSchedule coolingSchedule) {
+	public SimulatedAnnealingPermutation(ProgressListener<Permutation> progressListener, FitnessGoal<Permutation> fitnessGoal, Permutation Permutation, double initialTemperature, double finalTemperature, long maxTime, CoolingSchedule coolingSchedule) {
 		super(progressListener);
 
 		this.initialTemperature = initialTemperature;
 		this.finalTemperature = finalTemperature;
 		this.maxTime = maxTime;
 		this.fitnessGoal = fitnessGoal;
-		this.current = bitString;
+		this.current = Permutation;
 		this.coolingSchedule = coolingSchedule;
 	}
 
@@ -35,7 +35,7 @@ public class SimulatedAnnealingBitString extends Algorithm<BitString> {
 
 	@Override
 	public void step(long iteration) {
-		BitString mutation = current.localMutation();
+		Permutation mutation = (random.nextDouble() < 0.5 ? current.twoOpt() : current.threeOpt());
 
 		int currentFitness = fitnessGoal.evaluate(current);
 		int mutationFitness = fitnessGoal.evaluate(mutation);

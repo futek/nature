@@ -12,11 +12,14 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import nature.Algorithm;
+import nature.CoolingSchedule;
 import nature.FitnessGoal;
+import nature.MinMaxAntSystemPermutation;
 import nature.Nature;
 import nature.OnePlusOnePermutation;
 import nature.Permutation;
 import nature.ProgressListener;
+import nature.SimulatedAnnealingPermutation;
 
 public class PermutationPanelController {
 	private PermutationPanel view;
@@ -87,7 +90,7 @@ public class PermutationPanelController {
 						view.algorithmPane.algoMMASParams.setVisible(true);
 						break;
 				}
-				
+
 				Nature.frame.pack();
 			}
 		}
@@ -223,6 +226,26 @@ public class PermutationPanelController {
 	}
 
 	private Algorithm<Permutation> getAlgorithm(FitnessGoal<Permutation> fitnessGoal, Permutation startState) {
-		return new OnePlusOnePermutation(new ProgressHandler(), fitnessGoal, startState);
+		Algorithm<Permutation> algorithm = null;
+
+		String algoSelection = (String)view.algorithmPane.algoComboBox.getSelectedItem();
+		switch (algoSelection) {
+			case "(1+1) Evolutionary Algorithm":
+				algorithm = new OnePlusOnePermutation(new ProgressHandler(), fitnessGoal, startState);
+				break;
+			case "Simulated Annealing": // TODO: Handle invalid numbers
+				double initialTemperature = Double.parseDouble(view.algorithmPane.initTempField.getText());
+				double finalTemperature = Double.parseDouble(view.algorithmPane.finalTempField.getText());
+				long maxTime = Integer.parseInt(view.algorithmPane.timeField.getText());
+				CoolingSchedule coolingSchedule = CoolingSchedule.COOLING_SCHEDULES[view.algorithmPane.coolingComboBox.getSelectedIndex()];
+				algorithm = new SimulatedAnnealingPermutation(new ProgressHandler(), fitnessGoal, startState, initialTemperature, finalTemperature, maxTime, coolingSchedule);
+				break;
+			case "Min-Max Ant System": // TODO: Handle invalid numbers
+				double evaporationFactor = Double.parseDouble(view.algorithmPane.evaporationFactorField.getText());
+				algorithm = new MinMaxAntSystemPermutation(new ProgressHandler(), fitnessGoal, startState, evaporationFactor);
+				break;
+		}
+
+		return algorithm;
 	}
 }

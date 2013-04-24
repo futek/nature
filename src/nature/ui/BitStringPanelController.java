@@ -266,9 +266,9 @@ public class BitStringPanelController {
 	}
 
 	private Algorithm<BitString> getAlgorithm(FitnessGoal<BitString> fitnessGoal, BitString startState) {
-		// TODO: Read algo combobox and parameters
-		String algoSelection = (String)view.algorithmPane.algoComboBox.getSelectedItem();
+		Algorithm<BitString> algorithm = null;
 
+		String algoSelection = (String)view.algorithmPane.algoComboBox.getSelectedItem();
 		switch (algoSelection) {
 			case "(1+1) Evolutionary Algorithm":
 				algorithm = new OnePlusOneBitString(new ProgressHandler(), fitnessGoal, startState, 1.0 / startState.length()); // TODO: Read parameter
