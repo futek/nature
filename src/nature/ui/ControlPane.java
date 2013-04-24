@@ -16,11 +16,9 @@ class ControlPane extends JPanel {
 	public ControlPane() {
 		// Components
 		controlButton = new JButton("Start");
-//		controlButton.addChangeListener(controller);
 		controlButton.setMinimumSize(new Dimension(100, 0));
 
 		resetButton = new JButton("Reset");
-//		resetButton.addActionListener(controller);
 		resetButton.setMinimumSize(new Dimension(100, 0));
 		resetButton.setEnabled(false);
 
