@@ -4,53 +4,78 @@ public class MinMaxAntSystemPermutation extends Algorithm<Permutation> {
 	private FitnessGoal<Permutation> fitnessGoal;
 	private Permutation current;
 	private double rho;
-	private double[] pheromone;
+	private double[][] pheromone;
 
-	public MinMaxAntSystemPermutation(ProgressListener<Permutation> progressListener, FitnessGoal<Permutation> fitnessGoal, Permutation Permutation, double rho) {
+	public MinMaxAntSystemPermutation(ProgressListener<Permutation> progressListener, FitnessGoal<Permutation> fitnessGoal, Permutation permutation, double rho) {
 		super(progressListener);
 
 		this.rho = rho;
 		this.fitnessGoal = fitnessGoal;
-		this.current = Permutation;
+		this.current = permutation;
 	}
 
-	private void updatePheromones(Permutation Permutation) {
-//		boolean[] string = Permutation.getString();
-//		double tauMin = 1.0 / Permutation.length();
-//		double tauMax = 1.0 - 1.0 / Permutation.length();
-//		for (int i = 0; i < pheromone.length; i++) {
-//			if (string[i]) {
-//				pheromone[i] = Math.min((1.0 - rho) * pheromone[i] + rho, tauMax);
-//			} else {
-//				pheromone[i] = Math.max((1.0 - rho) * pheromone[i], tauMin);
-//			}
-//		}
+	private void updatePheromones(Permutation permutation) {
+		int[] perm = permutation.getPermutation();
+
+		double tauMin = 1.0 / permutation.length();
+		double tauMax = 1.0 - 1.0 / permutation.length();
+
+		for (int i = 0; i < permutation.length(); i++) {
+			for (int j = 0; j <= i; j++) {
+				boolean edgeInPermutation = false;
+
+				for (int k = 0; k < perm.length - 1; k++) {
+					if (perm[k] == i && perm[k + 1] == j || perm[k + 1] == i && perm[k] == j) {
+						edgeInPermutation = true;
+						break;
+					}
+				}
+
+				if (edgeInPermutation) {
+					pheromone[i][j] = Math.min((1.0 - rho) * pheromone[i][j] + rho, tauMax);
+				} else {
+					pheromone[i][j] = Math.max((1.0 - rho) * pheromone[i][j], tauMin);
+				}
+
+				pheromone[j][i] = pheromone[i][j];
+			}
+		}
 	}
 
 	@Override
 	public void init() {
-//		pheromone = new double[current.length()];
-//		current = current.constructMutation(pheromone);
-//		updatePheromones(current);
+		progressListener.select(current, fitnessGoal.evaluate(current));
+
+		int n = current.length();
+		double p = 1.0 / (n - 1);
+		pheromone = new double[n][n];
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j <= i; j++) {
+				pheromone[i][j] = p;
+				pheromone[j][i] = p;
+			}
+		}
+		current = current.constructMutation(pheromone);
+		updatePheromones(current);
 	}
 
 	@Override
 	public void step(long iteration) {
-//		Permutation mutation = current.constructMutation(pheromone);
-//
-//		double currentFitness = fitnessGoal.evaluate(current);
-//		double mutationFitness = fitnessGoal.evaluate(mutation);
-//
-//		if (fitnessGoal.compare(currentFitness, mutationFitness) <= 0) {
-//			current = mutation;
-//
-//			progressListener.select(current);
-//			if (fitnessGoal.isOptimal(current, currentFitness)) {
-//				progressListener.done();
-//				cancel();
-//			}
-//		}
-//
-//		updatePheromones(current);
+		Permutation mutation = current.constructMutation(pheromone);
+
+		int currentFitness = fitnessGoal.evaluate(current);
+		int mutationFitness = fitnessGoal.evaluate(mutation);
+
+		if (fitnessGoal.compare(currentFitness, mutationFitness) <= 0) {
+			current = mutation;
+
+			progressListener.select(current, currentFitness);
+			if (fitnessGoal.isOptimal(current, currentFitness)) {
+				progressListener.done();
+				cancel();
+			}
+		}
+
+		updatePheromones(current);
 	}
 }

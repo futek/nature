@@ -36,6 +36,7 @@ public abstract class Algorithm<T> implements Runnable {
 			}
 		} catch (Exception e) {
 			thrown = e;
+			e.printStackTrace();
 		}
 	}
 

@@ -73,6 +73,10 @@ public class Permutation {
 //		}
 	}
 
+	public int length() {
+		return graph.size();
+	}
+
 	public double lengthOfTour() {
 		double length = 0;
 
@@ -144,8 +148,8 @@ public class Permutation {
 		int[] mutation = new int[permutation.length];
 
 		Set<Integer> nonVisited = new HashSet<Integer>();
-		for (int node : permutation) {
-			nonVisited.add(node);
+		for (int i = 1; i < permutation.length; i++) {
+			nonVisited.add(permutation[i]);
 		}
 
 		int v = permutation[0];
