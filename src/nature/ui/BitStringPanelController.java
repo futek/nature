@@ -3,12 +3,12 @@ package nature.ui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import nature.Algorithm;
 import nature.BitString;
+import nature.CoolingSchedule;
 import nature.FitnessGoal;
 import nature.MinMaxAntSystemBitString;
 import nature.Nature;
@@ -68,7 +68,7 @@ public class BitStringPanelController {
 						view.algorithmPane.algoMMASParams.setVisible(true);
 						break;
 				}
-				
+
 				Nature.frame.pack();
 			}
 		}
@@ -274,9 +274,11 @@ public class BitStringPanelController {
 				algorithm = new OnePlusOneBitString(new ProgressHandler(), fitnessGoal, startState, 1.0 / startState.length()); // TODO: Read parameter
 				break;
 			case "Simulated Annealing": // TODO: Handle invalid numbers
-			int maxTime = Integer.parseInt(view.algorithmPane.timeField.getText());
-			double initialTemperature = Double.parseDouble(view.algorithmPane.initTempField.getText());
-			algorithm = new SimulatedAnnealingBitString(new ProgressHandler(), fitnessGoal, startState, initialTemperature, maxTime); // TODO: Read parameter
+				double initialTemperature = Double.parseDouble(view.algorithmPane.initTempField.getText());
+				double finalTemperature = Double.parseDouble(view.algorithmPane.finalTempField.getText());
+				long maxTime = Integer.parseInt(view.algorithmPane.timeField.getText());
+				CoolingSchedule coolingSchedule = CoolingSchedule.COOLING_SCHEDULES[view.algorithmPane.coolingComboBox.getSelectedIndex()];
+				algorithm = new SimulatedAnnealingBitString(new ProgressHandler(), fitnessGoal, startState, initialTemperature, finalTemperature, maxTime, coolingSchedule);
 				break;
 			case "Min-Max Ant System": // TODO: Handle invalid numbers
 				double evaporationFactor = Double.parseDouble(view.algorithmPane.evaporationFactorField.getText());
