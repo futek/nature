@@ -144,7 +144,7 @@ public class Permutation {
 		return new Permutation(graph, mutation, minBounds, maxBounds);
 	}
 
-	public Permutation constructMutation(double[][] pheromone) {
+	public Permutation constructMutation(double[][] pheromone, double alpha, double beta) {
 		int[] mutation = new int[permutation.length];
 
 		Set<Integer> nonVisited = new HashSet<Integer>();
@@ -158,28 +158,40 @@ public class Permutation {
 		while (nonVisited.size() > 0) {
 			mutation[i] = v;
 
-			double sum = 0;
+			double R = 0;
 			for (int neighbor : nonVisited) {
-				sum += pheromone[v][neighbor];
+				Point2D.Double src = graph.get(v);
+				Point2D.Double dst = graph.get(neighbor);
+				double weight = Point2D.Double.distance(src.x, src.y, dst.x, dst.y);
+				double heuristic = 1.0 / weight;
+				R += Math.pow(pheromone[v][neighbor], alpha) * Math.pow(heuristic, beta);
 			}
 
 			double r = random.nextDouble();
-			int w = 0;
+			int w = -1;
 
 			int j = 0;
-			int psum = 0;
+			double psum = 0;
 			for (int neighbor : nonVisited) {
-				double p = pheromone[v][neighbor] / sum;
+				Point2D.Double src = graph.get(v);
+				Point2D.Double dst = graph.get(neighbor);
+				double weight = Point2D.Double.distance(src.x, src.y, dst.x, dst.y);
+				double heuristic = 1.0 / weight;
+
+				double p = Math.pow(pheromone[v][neighbor], alpha) * Math.pow(heuristic, beta) / R;
 				psum += p;
 
-				if (psum < r || j == nonVisited.size() - 1) {
+
+				if (r < psum || j == nonVisited.size() - 1) {
 					w = neighbor;
 					break;
 				}
+
+				j++;
 			}
 
-			nonVisited.remove(w);
 			v = w;
+			nonVisited.remove(w);
 
 			i++;
 		}

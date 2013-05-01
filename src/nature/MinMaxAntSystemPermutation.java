@@ -5,6 +5,8 @@ public class MinMaxAntSystemPermutation extends Algorithm<Permutation> {
 	private Permutation current;
 	private double rho;
 	private double[][] pheromone;
+	private double alpha = 1.0;
+	private double beta = 10.0;
 
 	public MinMaxAntSystemPermutation(ProgressListener<Permutation> progressListener, FitnessGoal<Permutation> fitnessGoal, Permutation permutation, double rho) {
 		super(progressListener);
@@ -55,13 +57,13 @@ public class MinMaxAntSystemPermutation extends Algorithm<Permutation> {
 				pheromone[j][i] = p;
 			}
 		}
-		current = current.constructMutation(pheromone);
+		current = current.constructMutation(pheromone, alpha, beta);
 		updatePheromones(current);
 	}
 
 	@Override
 	public void step(long iteration) {
-		Permutation mutation = current.constructMutation(pheromone);
+		Permutation mutation = current.constructMutation(pheromone, alpha, beta);
 
 		int currentFitness = fitnessGoal.evaluate(current);
 		int mutationFitness = fitnessGoal.evaluate(mutation);
