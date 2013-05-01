@@ -13,9 +13,8 @@ import javax.swing.JPanel;
 import nature.Permutation;
 
 public class GraphVisualizer extends JPanel {
-	private static final int NODE_SIZE = 8;
-	private static final Color NODE_COLOR = new Color(255, 0, 0);
-	private static final Color LINE_COLOR = new Color(0, 0, 0);
+	private static final int NODE_SIZE = 4	;
+	private static final Color COLOR = new Color(0, 0, 0);
 	private static int padding = 32;
 
 	private Permutation permutation;
@@ -44,7 +43,7 @@ public class GraphVisualizer extends JPanel {
 		Point2D.Double minBounds = permutation.getMinBounds();
 		Point2D.Double maxBounds = permutation.getMaxBounds();
 
-		g2.setColor(LINE_COLOR);
+		g2.setColor(COLOR);
 
 		for (int i = 1; i <= permutationArray.length; i++) {
 			int srcIndex = permutationArray[i - 1];
@@ -53,20 +52,12 @@ public class GraphVisualizer extends JPanel {
 			Point2D.Double p1 = graph.get(srcIndex);
 			Point2D.Double p2 = graph.get(dstIndex);
 
-//			int x1 = (int) ((p1.x - minBounds.x) / (maxBounds.x - minBounds.x) * size.width);
-//			int y1 = (int) ((p1.y - minBounds.y) / (maxBounds.y - minBounds.y) * size.height);
-//			int x2 = (int) ((p2.x - minBounds.x) / (maxBounds.x - minBounds.x) * size.width);
-//			int y2 = (int) ((p2.y - minBounds.y) / (maxBounds.y - minBounds.y) * size.height);
-
 			Point p1t = transform(p1, minBounds, maxBounds, size);
 			Point p2t = transform(p2, minBounds, maxBounds, size);
 
-//			System.out.println("line!... x1: " + x1 + ", y1: " + y1 + ", x2: " + x2 + ", y2: " + y2);
-
 			g2.drawLine(p1t.x, p1t.y,p2t.x, p2t.y);
+			g2.fillOval(p1t.x - NODE_SIZE/2, p1t.y - NODE_SIZE/2, NODE_SIZE, NODE_SIZE);
 		}
-
-
 	}
 
 	public void setPermutation(Permutation permutation) {
