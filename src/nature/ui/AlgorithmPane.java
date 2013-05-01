@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 class AlgorithmPane extends JPanel {
 	public JComboBox<String> algoComboBox;
 	public JPanel algoEAParams, algoSAParams, algoMMASParams;
-	public JTextField timeField, initTempField, finalTempField, evaporationFactorField;
+	public JTextField timeField, initTempField, finalTempField, evaporationFactorField, alphaField, betaField;
 	public JComboBox<String> coolingComboBox;
 
 	public AlgorithmPane() {
@@ -118,17 +118,43 @@ class AlgorithmPane extends JPanel {
 			layout.setAutoCreateContainerGaps(true);
 			algoMMASParams.setLayout(layout);
 
-			JLabel label = new JLabel("Evaporation factor:");
+			JLabel evaporationFactorLabel = new JLabel("Evaporation factor:");
 			evaporationFactorField = new JTextField("0.01");
 
-			layout.setHorizontalGroup(layout.createSequentialGroup()
-					.addComponent(label)
-					.addComponent(evaporationFactorField)
+			JLabel alphaLabel = new JLabel("Alpha:");
+			alphaField = new JTextField("1.0");
+
+			JLabel betaLabel = new JLabel("Beta:");
+			betaField = new JTextField("1.0");
+
+			layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+					.addGroup(layout.createSequentialGroup()
+							.addComponent(evaporationFactorLabel)
+							.addComponent(evaporationFactorField)
+					)
+					.addGroup(layout.createSequentialGroup()
+							.addComponent(alphaLabel)
+							.addComponent(alphaField)
+					)
+					.addGroup(layout.createSequentialGroup()
+							.addComponent(betaLabel)
+							.addComponent(betaField)
+					)
 			);
 
-			layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-					.addComponent(label)
-					.addComponent(evaporationFactorField)
+			layout.setVerticalGroup(layout.createSequentialGroup()
+					.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(evaporationFactorLabel)
+							.addComponent(evaporationFactorField)
+					)
+					.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(alphaLabel)
+							.addComponent(alphaField)
+					)
+					.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+							.addComponent(betaLabel)
+							.addComponent(betaField)
+					)
 			);
 		}
 

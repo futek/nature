@@ -242,7 +242,9 @@ public class PermutationPanelController {
 				break;
 			case "Min-Max Ant System": // TODO: Handle invalid numbers
 				double evaporationFactor = Double.parseDouble(view.algorithmPane.evaporationFactorField.getText());
-				algorithm = new MinMaxAntSystemPermutation(new ProgressHandler(), fitnessGoal, startState, evaporationFactor);
+				double alpha = Double.parseDouble(view.algorithmPane.alphaField.getText());
+				double beta = Double.parseDouble(view.algorithmPane.betaField.getText());
+				algorithm = new MinMaxAntSystemPermutation(new ProgressHandler(), fitnessGoal, startState, evaporationFactor, alpha, beta);
 				break;
 		}
 

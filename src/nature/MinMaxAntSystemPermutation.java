@@ -3,17 +3,17 @@ package nature;
 public class MinMaxAntSystemPermutation extends Algorithm<Permutation> {
 	private FitnessGoal<Permutation> fitnessGoal;
 	private Permutation current;
-	private double rho;
+	private double rho, alpha, beta;
 	private double[][] pheromone;
-	private double alpha = 1.0;
-	private double beta = 10.0;
 
-	public MinMaxAntSystemPermutation(ProgressListener<Permutation> progressListener, FitnessGoal<Permutation> fitnessGoal, Permutation permutation, double rho) {
+	public MinMaxAntSystemPermutation(ProgressListener<Permutation> progressListener, FitnessGoal<Permutation> fitnessGoal, Permutation permutation, double rho, double alpha, double beta) {
 		super(progressListener);
 
-		this.rho = rho;
 		this.fitnessGoal = fitnessGoal;
 		this.current = permutation;
+		this.rho = rho;
+		this.alpha = alpha;
+		this.beta = beta;
 	}
 
 	private void updatePheromones(Permutation permutation) {
