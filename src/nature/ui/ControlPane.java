@@ -33,8 +33,6 @@ class ControlPane extends JPanel {
 		sleepSlider.setSnapToTicks(true);
 		sleepLabel.setLabelFor(sleepSlider);
 
-
-
 		// Defaults
 		iterationLabel.setText("Iteration: 0");
 

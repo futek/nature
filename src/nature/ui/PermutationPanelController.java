@@ -139,7 +139,7 @@ public class PermutationPanelController {
 				case "Reset":
 					algorithm.cancel();
 					algorithm = null;
-					// view.visualizationPane.onionVisualizer.clearPoints();
+					view.visualizationPane.drawingPane.setPermutation(startState);
 
 					// Configure buttons
 					view.controlPane.controlButton.setText("Start");
