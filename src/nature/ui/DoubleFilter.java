@@ -5,10 +5,10 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 
-public class IntegerFilter extends DocumentFilter {
-	private int min, max;
+public class DoubleFilter extends DocumentFilter {
+	private double min, max;
 
-	public IntegerFilter(int min, int max) {
+	public DoubleFilter(double min, double max) {
 		this.min = min;
 		this.max = max;
 	}
@@ -30,7 +30,7 @@ public class IntegerFilter extends DocumentFilter {
 
 	private boolean test(String text) {
 		try {
-			int value = Integer.parseInt(text);
+			double value = Double.parseDouble(text);
 			return value >= min && value <= max;
 		} catch (NumberFormatException e) {
 			return false;

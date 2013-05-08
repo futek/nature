@@ -1,16 +1,20 @@
 package nature.ui;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 
-public class IntegerFilter extends DocumentFilter {
-	private int min, max;
+public class BinaryFilter extends DocumentFilter {
+	private static final Matcher binaryMatcher = Pattern.compile("[01]+").matcher("");
 
-	public IntegerFilter(int min, int max) {
-		this.min = min;
-		this.max = max;
+	private int length;
+
+	public BinaryFilter(int length) {
+		this.length = length;
 	}
 
 	@Override
@@ -30,8 +34,8 @@ public class IntegerFilter extends DocumentFilter {
 
 	private boolean test(String text) {
 		try {
-			int value = Integer.parseInt(text);
-			return value >= min && value <= max;
+			binaryMatcher.reset(text);
+			return text.length() <= length && binaryMatcher.matches();
 		} catch (NumberFormatException e) {
 			return false;
 		}

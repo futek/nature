@@ -11,7 +11,6 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 public class BitStringPanel extends JPanel {
 	public InitializationPane initializationPane;
@@ -45,24 +44,26 @@ public class BitStringPanel extends JPanel {
 	}
 
 	class InitializationPane extends JPanel {
-		public JTextField lengthField, probField, customField;
+		public JIntegerField lengthField;
+		public JBinaryField customField;
+		public JDoubleField probField;
 		public JCheckBox customCheckBox;
 
 		public InitializationPane() {
 			// Components
 			JLabel lengthLabel = new JLabel("Length:");
-			lengthField = new JTextField();
+			lengthField = new JIntegerField(1, Integer.MAX_VALUE);
 			lengthLabel.setLabelFor(lengthField);
 
 			JLabel probLabel = new JLabel("Probability:");
-			probField = new JTextField();
+			probField = new JDoubleField(0, 1);
 			probLabel.setLabelFor(probField);
 
 			// TODO: Implement checkbox behavior
 			customCheckBox = new JCheckBox();
 
 			JLabel customLabel = new JLabel("Custom:");
-			customField = new JTextField();
+			customField = new JBinaryField(10);
 			customLabel.setLabelFor(customField);
 			customField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 0)); // Avoid vertical expansion
 

@@ -45,18 +45,21 @@ class AlgorithmPane extends JPanel {
 
 			JLabel initTempLabel = new JLabel("Initial temperature:");
 			initTempLabel.setMinimumSize(new Dimension(150, 0));
-			initTempField = new JTextField("0.01");
+			initTempField = new JDoubleField(0, Double.MAX_VALUE);
 			initTempLabel.setLabelFor(initTempField);
+			initTempField.setText("0.1");
 
 			JLabel finalTempLabel = new JLabel("Final temperature:");
 			finalTempLabel.setMinimumSize(new Dimension(150, 0));
-			finalTempField = new JTextField("0");
+			finalTempField = new JDoubleField(0, Double.MAX_VALUE);
 			finalTempLabel.setLabelFor(finalTempField);
+			finalTempField.setText("0");
 
 			JLabel timeLabel = new JLabel("Maximum time:");
 			timeLabel.setMinimumSize(new Dimension(150, 0));
-			timeField = new JTextField("1337");
+			timeField = new JIntegerField(0, Integer.MAX_VALUE);
 			timeLabel.setLabelFor(timeField);
+			timeField.setText("500000");
 
 			// http://www.btluke.com/simanf1.html
 			JLabel coolingLabel = new JLabel("Cooling schedule:");
@@ -119,13 +122,16 @@ class AlgorithmPane extends JPanel {
 			algoMMASParams.setLayout(layout);
 
 			JLabel evaporationFactorLabel = new JLabel("Evaporation factor:");
-			evaporationFactorField = new JTextField("0.01");
+			evaporationFactorField = new JDoubleField(0, 1);
+			evaporationFactorField.setText("0.1");
 
 			JLabel alphaLabel = new JLabel("Alpha:");
-			alphaField = new JTextField("1.0");
+			alphaField = new JDoubleField(0, 100);
+			alphaField.setText("1.0");
 
 			JLabel betaLabel = new JLabel("Beta:");
-			betaField = new JTextField("1.0");
+			betaField = new JDoubleField(0, 100);
+			betaField.setText("1.0");
 
 			layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 					.addGroup(layout.createSequentialGroup()
