@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.Point2D;
-import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -39,7 +38,7 @@ public class GraphVisualizer extends JPanel {
 		if (permutation == null) return;
 
 		int[] permutationArray = permutation.getPermutation();
-		List<Point2D.Double> graph = permutation.getGraph();
+		Point2D.Double[] graph = permutation.getGraph();
 		Point2D.Double minBounds = permutation.getMinBounds();
 		Point2D.Double maxBounds = permutation.getMaxBounds();
 
@@ -49,8 +48,8 @@ public class GraphVisualizer extends JPanel {
 			int srcIndex = permutationArray[i - 1];
 			int dstIndex = permutationArray[i % permutationArray.length];
 
-			Point2D.Double p1 = graph.get(srcIndex);
-			Point2D.Double p2 = graph.get(dstIndex);
+			Point2D.Double p1 = graph[srcIndex];
+			Point2D.Double p2 = graph[dstIndex];
 
 			Point p1t = transform(p1, minBounds, maxBounds, size);
 			Point p2t = transform(p2, minBounds, maxBounds, size);
