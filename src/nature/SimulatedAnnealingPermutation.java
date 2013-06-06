@@ -44,6 +44,7 @@ public class SimulatedAnnealingPermutation extends Algorithm<Permutation> {
 		double probability = Math.min(1.0, Math.pow(alpha(iteration), fitnessGoal.difference(currentFitness, mutationFitness)));
 		if (random.nextDouble() < probability) {
 			current = mutation;
+			currentFitness = mutationFitness;
 
 			progressListener.select(current, currentFitness);
 			if (fitnessGoal.isOptimal(current, currentFitness)) {

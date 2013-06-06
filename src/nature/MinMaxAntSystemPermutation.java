@@ -70,6 +70,7 @@ public class MinMaxAntSystemPermutation extends Algorithm<Permutation> {
 
 		if (fitnessGoal.compare(currentFitness, mutationFitness) <= 0) {
 			current = mutation;
+			currentFitness = mutationFitness;
 
 			progressListener.select(current, currentFitness);
 			if (fitnessGoal.isOptimal(current, currentFitness)) {
