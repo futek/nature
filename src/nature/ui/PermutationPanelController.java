@@ -31,6 +31,7 @@ public class PermutationPanelController {
 
 		InitializationPaneHandler initializationPaneHandler = new InitializationPaneHandler();
 		view.initializationPane.loadButton.addActionListener(initializationPaneHandler);
+		view.initializationPane.randomizeButton.addActionListener(initializationPaneHandler);
 
 		AlgorithmPaneHandler algorithmPaneHandler = new AlgorithmPaneHandler();
 		view.algorithmPane.algoComboBox.addActionListener(algorithmPaneHandler);
@@ -47,22 +48,43 @@ public class PermutationPanelController {
 
 		@Override
 		public void actionPerformed(ActionEvent evt) {
-			if (evt.getActionCommand().equals("Load Graph")) {
-				int returnVal = fileChooser.showOpenDialog(view);
+			switch (evt.getActionCommand()) {
+				case "Load Graph":
+					int returnVal = fileChooser.showOpenDialog(view);
 
-				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					File file = fileChooser.getSelectedFile();
+					if (returnVal == JFileChooser.APPROVE_OPTION) {
+						File file = fileChooser.getSelectedFile();
 
-					try {
-						InputStream stream = new FileInputStream(file);
-						startState = new Permutation(stream);
-						view.initializationPane.statusLabel.setText("Status: Graph loaded (" + startState.numberOfNodes() + " nodes)");
-						view.controlPane.controlButton.setEnabled(true);
-						view.visualizationPane.drawingPane.setPermutation(startState);
-					} catch (IllegalArgumentException | FileNotFoundException e) {
-						view.initializationPane.statusLabel.setText("Status: " + e.getMessage());
+						try {
+							InputStream stream = new FileInputStream(file);
+							startState = new Permutation(stream);
+
+							String html = "<html>";
+							html += "Status: Graph loaded (" + startState.numberOfNodes() + " nodes)";
+							if (startState.getName() != null) {
+								html += "<br>Name: " + startState.getName();
+							}
+							if (startState.getComment() != null) {
+								html += "<br>" + startState.getComment();
+							}
+							html += "<html>";
+							view.initializationPane.statusLabel.setText(html);
+
+							view.controlPane.controlButton.setEnabled(true);
+							view.initializationPane.randomizeButton.setEnabled(true);
+
+							view.fitnessPane.currentFitnessLabel.setText("Current fitness: " + getFitnessGoal().evaluate(startState));
+							view.visualizationPane.drawingPane.setPermutation(startState);
+						} catch (IllegalArgumentException | FileNotFoundException e) {
+							view.initializationPane.statusLabel.setText("Status: " + e.getMessage());
+						}
 					}
-				}
+					break;
+				case "Randomize":
+					startState = startState.randomize();
+					view.fitnessPane.currentFitnessLabel.setText("Current fitness: " + getFitnessGoal().evaluate(startState));
+					view.visualizationPane.drawingPane.setPermutation(startState);
+					break;
 			}
 		}
 	}
@@ -117,6 +139,7 @@ public class PermutationPanelController {
 					// Configure buttons
 					view.controlPane.controlButton.setText("Pause");
 					view.controlPane.resetButton.setEnabled(true);
+					view.initializationPane.randomizeButton.setEnabled(false);
 
 					break;
 
@@ -144,6 +167,7 @@ public class PermutationPanelController {
 					// Configure buttons
 					view.controlPane.controlButton.setText("Start");
 					view.controlPane.resetButton.setEnabled(false);
+					view.initializationPane.randomizeButton.setEnabled(true);
 
 					break;
 			}

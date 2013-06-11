@@ -2,6 +2,7 @@ package nature;
 
 import java.awt.geom.Point2D;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
@@ -18,6 +19,7 @@ public class Permutation {
 	private Point2D.Double[] graph;
 	private int[] permutation;
 	private Point2D.Double minBounds, maxBounds;
+	private String name, comment;
 
 	public Permutation(Point2D.Double[] graph, int[] permutation, Point2D.Double minBounds, Point2D.Double maxBounds) {
 		this.graph = graph;
@@ -28,8 +30,6 @@ public class Permutation {
 
 	public Permutation(InputStream stream) throws IllegalArgumentException {
 		// Parse graph
-		String name = "Unnamed";
-		String comment = null;
 		int dimension = -1;
 
 		boolean inDataSection = false;
@@ -125,14 +125,14 @@ public class Permutation {
 		for (int i = 0; i < permutation.length; i++) {
 			permutation[i] = i;
 		}
+	}
 
-//		// Debug: shuffle permutation a bit
-//		for (int i = 0; i < permutation.length; i++) {
-//			int j = i + random.nextInt(permutation.length - i);
-//			int tmp = permutation[i];
-//			permutation[i] = permutation[j];
-//			permutation[j] = tmp;
-//		}
+	public String getName() {
+		return name;
+	}
+
+	public String getComment() {
+		return comment;
 	}
 
 	public int length() {
@@ -259,6 +259,21 @@ public class Permutation {
 		}
 
 		mutation[i] = v;
+
+		return new Permutation(graph, mutation, minBounds, maxBounds);
+	}
+
+	public Permutation randomize() {
+		// Copy permutation into mutation
+		 int[] mutation = Arrays.copyOf(permutation, permutation.length);
+
+		// Shuffle mutation a bit
+		for (int i = 0; i < mutation.length; i++) {
+			int j = i + random.nextInt(mutation.length - i);
+			int tmp = mutation[i];
+			mutation[i] = mutation[j];
+			mutation[j] = tmp;
+		}
 
 		return new Permutation(graph, mutation, minBounds, maxBounds);
 	}

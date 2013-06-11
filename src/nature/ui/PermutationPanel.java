@@ -45,13 +45,16 @@ public class PermutationPanel extends JPanel {
 	}
 
 	public class InitializationPane extends JPanel {
-		public JButton loadButton;
+		public JButton loadButton, randomizeButton;
 		public JLabel statusLabel;
 
 		public InitializationPane() {
 			// Components
 			loadButton = new JButton("Load Graph");
-			statusLabel = new JLabel("Status: No graph loaded");
+			randomizeButton = new JButton("Randomize");
+			statusLabel = new JLabel("<html>Status: No graph loaded</html>");
+
+			randomizeButton.setEnabled(false);
 
 			// Layout
 			GroupLayout layout = new GroupLayout(this);
@@ -60,13 +63,19 @@ public class PermutationPanel extends JPanel {
 			setLayout(layout);
 
 			layout.setHorizontalGroup(layout.createSequentialGroup()
-					.addComponent(loadButton)
+					.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+							.addComponent(loadButton)
+							.addComponent(randomizeButton)
+					)
 					.addComponent(statusLabel)
 					.addGap(0, 0, Integer.MAX_VALUE) // Force horizontal expansion
 			);
 
 			layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-					.addComponent(loadButton)
+					.addGroup(layout.createSequentialGroup()
+							.addComponent(loadButton)
+							.addComponent(randomizeButton)
+					)
 					.addComponent(statusLabel)
 			);
 		}
