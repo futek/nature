@@ -72,7 +72,7 @@ class AlgorithmPane extends JPanel {
 			coolingComboBox.addItem("Cooling Schedule 5");
 			coolingComboBox.addItem("Cooling Schedule 6");
 			coolingComboBox.addItem("Cooling Schedule 7");
-			coolingComboBox.addItem("Easter egg!");
+			coolingComboBox.addItem("Cooling Schedule 8");
 			coolingComboBox.addItem("Cooling Schedule 9");
 			coolingLabel.setLabelFor(coolingComboBox);
 
