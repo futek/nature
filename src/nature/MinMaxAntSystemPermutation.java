@@ -24,12 +24,16 @@ public class MinMaxAntSystemPermutation extends Algorithm<Permutation> {
 
 		for (int i = 0; i < permutation.length(); i++) {
 			for (int j = 0; j <= i; j++) {
-				boolean edgeInPermutation = false;
+				boolean edgeInPermutation = perm[0] == i && perm[perm.length - 1] == j ||
+						                    perm[0] == j && perm[perm.length - 1] == i;
 
-				for (int k = 0; k < perm.length - 1; k++) {
-					if (perm[k] == i && perm[k + 1] == j || perm[k + 1] == i && perm[k] == j) {
-						edgeInPermutation = true;
-						break;
+				if (!edgeInPermutation) {
+					for (int k = 0; k < perm.length - 1; k++) {
+						if (perm[k] == i && perm[k + 1] == j ||
+							perm[k] == j && perm[k + 1] == i) {
+							edgeInPermutation = true;
+							break;
+						}
 					}
 				}
 
