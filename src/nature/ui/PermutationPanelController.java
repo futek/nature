@@ -190,7 +190,12 @@ public class PermutationPanelController {
 		@Override
 		public void select(Permutation state, int fitness) {
 			view.fitnessPane.currentFitnessLabel.setText("Current fitness: " + fitness);
-			view.visualizationPane.drawingPane.setPermutation(state);
+
+			if (algorithm instanceof MinMaxAntSystemPermutation) {
+				view.visualizationPane.drawingPane.setPermutation(state, ((MinMaxAntSystemPermutation)algorithm).pheromone);
+			} else {
+				view.visualizationPane.drawingPane.setPermutation(state);
+			}
 		}
 
 		@Override

@@ -1,5 +1,6 @@
 package nature.ui;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -17,6 +18,7 @@ public class GraphVisualizer extends JPanel {
 	private static int padding = 32;
 
 	private Permutation permutation;
+	private double[][] pheromone = null;
 
 	private Point transform(Point2D.Double p, Point2D.Double minBounds, Point2D.Double maxBounds, Dimension size) {
 		double paddingX = ((double) padding / size.width) * (maxBounds.x - minBounds.x);
@@ -42,6 +44,30 @@ public class GraphVisualizer extends JPanel {
 		Point2D.Double minBounds = permutation.getMinBounds();
 		Point2D.Double maxBounds = permutation.getMaxBounds();
 
+		// Draw pheromones
+		if (pheromone != null) {
+			double tauMin = 1.0 / permutation.length();
+			double tauMax = 1.0 - 1.0 / permutation.length();
+
+			for (int i = 0; i < pheromone.length; i++) {
+				for (int j = 0; j < i; j++) {
+					Point2D.Double p1 = graph[i];
+					Point2D.Double p2 = graph[j];
+
+					Point p1t = transform(p1, minBounds, maxBounds, size);
+					Point p2t = transform(p2, minBounds, maxBounds, size);
+
+					double ratio = (pheromone[i][j] - tauMin) / (tauMax - tauMin);
+
+					g2.setStroke(new BasicStroke((float)(ratio * 10.0)));
+					g2.setColor(Color.getHSBColor((float)(60.0f / 360.0f * (1.0f - ratio)), 1.0f, 1.0f));
+					g2.drawLine(p1t.x, p1t.y,p2t.x, p2t.y);
+				}
+			}
+		}
+
+		// Draw permutation and vertices
+		g2.setStroke(new BasicStroke(1));
 		g2.setColor(COLOR);
 
 		for (int i = 1; i <= permutationArray.length; i++) {
@@ -61,6 +87,13 @@ public class GraphVisualizer extends JPanel {
 
 	public void setPermutation(Permutation permutation) {
 		this.permutation = permutation;
+		this.pheromone = null;
+		repaint();
+	}
+
+	public void setPermutation(Permutation permutation, double[][] pheromone) {
+		this.permutation = permutation;
+		this.pheromone = pheromone;
 		repaint();
 	}
 }

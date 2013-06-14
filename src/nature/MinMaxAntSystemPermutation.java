@@ -4,7 +4,7 @@ public class MinMaxAntSystemPermutation extends Algorithm<Permutation> {
 	private FitnessGoal<Permutation> fitnessGoal;
 	private Permutation current;
 	private double rho, alpha, beta;
-	private double[][] pheromone;
+	public double[][] pheromone;
 
 	public MinMaxAntSystemPermutation(ProgressListener<Permutation> progressListener, FitnessGoal<Permutation> fitnessGoal, Permutation permutation, double rho, double alpha, double beta) {
 		super(progressListener);
