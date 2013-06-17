@@ -51,6 +51,9 @@ public class GraphVisualizer extends JPanel {
 
 			for (int i = 0; i < pheromone.length; i++) {
 				for (int j = 0; j < i; j++) {
+					// Don't draw minimum pheromones
+					if (pheromone[i][j] == tauMin) continue;
+
 					Point2D.Double p1 = graph[i];
 					Point2D.Double p2 = graph[j];
 
