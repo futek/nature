@@ -139,8 +139,8 @@ public class Permutation {
 		return graph.length;
 	}
 
-	public double lengthOfTour() {
-		double length = 0;
+	public int lengthOfTour() {
+		int length = 0;
 
 		for (int i = 1; i <= permutation.length; i++) {
 			int srcIndex = permutation[i - 1];
@@ -149,7 +149,7 @@ public class Permutation {
 			Point2D.Double src = graph[srcIndex];
 			Point2D.Double dst = graph[dstIndex];
 
-			length += src.distance(dst);
+			length += (int) Math.round(src.distance(dst));
 		}
 
 		return length;
