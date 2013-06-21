@@ -13,9 +13,8 @@ import java.util.regex.Pattern;
 public class Permutation {
 	private static final Random random = new Random();
 	private static final Pattern keywordPattern = Pattern.compile("^([A-Z_]+)\\p{Blank}*:\\p{Blank}*(\\p{Print}+)\\p{Blank}*$");
-	private static final Pattern coordPattern = Pattern.compile("^(\\d+)\\p{Blank}+(\\d+(?:\\.\\d*)?)\\p{Blank}+(\\d+(?:\\.\\d*)?)\\p{Blank}*$");
+	private static final Pattern coordPattern = Pattern.compile("^\\p{Blank}*(\\d+)\\p{Blank}+(\\d+(?:\\.\\d*)?)\\p{Blank}+(\\d+(?:\\.\\d*)?)\\p{Blank}*$");
 
-	//private List<Point2D.Double> graph = new ArrayList<Point2D.Double>();
 	private Point2D.Double[] graph;
 	private int[] permutation;
 	private Point2D.Double minBounds, maxBounds;
